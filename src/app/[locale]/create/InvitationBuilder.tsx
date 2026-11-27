@@ -118,7 +118,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     } finally {
       setDraftLoaded(true);
     }
-  }, [initialTemplate, locale, t.restored]);
+  }, [initialTemplate, initialType, locale, t.restored]);
 
   const dateLabel = useMemo(() => {
     if (!form.date) return t.dateLabel;
