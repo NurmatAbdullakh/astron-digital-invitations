@@ -845,3 +845,22 @@ h2{font-family:var(--serif);font-size:clamp(32px,4vw,45px);font-weight:500;lette
 @media(prefers-reduced-motion:reduce){
  .invitation-artwork *{animation:none!important;transition:none!important}
 }
+
+@media(max-height:700px) and (min-width:681px){
+ .studio-wizard .wizard-header{height:64px;min-height:64px;flex-basis:64px}
+ .studio-wizard .wizard-tab{height:42px}
+ .studio-wizard .wizard-topline{height:78px;min-height:78px;flex-basis:78px;padding-block:7px}
+ .studio-wizard .wizard-workspace{padding-block:8px}
+ .studio-wizard .wizard-template-art{height:clamp(100px,16vh,130px)}
+ .studio-wizard .wizard-section-title{margin-bottom:10px}
+ .studio-wizard .wizard-event-picker{margin-bottom:10px}
+ .studio-wizard .wizard-actionbar{height:60px;min-height:60px;flex-basis:60px}
+ .invitation-artwork--compact{min-height:clamp(250px,38vh,340px);padding-block:16px}
+ .invitation-artwork--compact .artwork-mark{height:clamp(40px,7vh,58px);margin:4px 0}
+ .invitation-artwork--compact .preview-kicker{margin-bottom:7px}
+ .invitation-artwork--compact .artwork-divider{margin:7px 0 5px}
+ .invitation-artwork--compact .preview-title{margin-bottom:7px}
+ .invitation-artwork--compact .artwork-date-block{margin-bottom:6px}
+ .invitation-artwork--compact .preview-location{margin-bottom:5px}
+ .invitation-artwork--compact .preview-message{margin-bottom:5px}
+}
