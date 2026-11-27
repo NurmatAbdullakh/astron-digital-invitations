@@ -129,7 +129,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     }).format(date);
   }, [form.date, locale, t.dateLabel]);
 
-  const selectedTemplate = getInvitationTemplate(form.template);
+  const selectedTemplate = getInvitationTemplate(form.template);\n  const eventName = form.type === "birthday" ? t.birthday : form.type === "family" ? t.family : form.type === "corporate" ? t.corporate : form.type === "graduation" ? t.graduation : t.wedding;
 
   function update<K extends keyof Invitation>(key: K, value: Invitation[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -245,7 +245,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
             <span className="preview-kicker">{t.invitation}</span>
             <h2>{form.hosts || form.title || "Aziza & Mirjalol"}</h2>
             <span className="preview-rule">✧</span>
-            <p className="preview-title">{form.title || t[form.type as keyof typeof t]}</p>
+            <p className="preview-title">{form.title || eventName}</p>
             <strong>{dateLabel}</strong>
             <span>{form.time || "18:00"}</span>
             <div className="preview-location"><b>{t.location}</b><span>{form.venue || "Navruz Grand Hall"}</span><small>{form.address || "Tashkent, Uzbekistan"}</small></div>
