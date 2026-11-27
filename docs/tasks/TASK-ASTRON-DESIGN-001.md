@@ -14,18 +14,20 @@ labels: [frontend, ux, mobile-first, invitations]
 ---
 
 ## Objective
-Replace the basic invitation form with a compact, mobile-first invitation studio. Users must be able to browse/select a template, edit event details, see an accurate live preview, save a local draft, and create a shareable invitation link.
+Evolve the basic form into a visually distinctive, premium-feeling invitation studio. The interface must create an emotional first impression while remaining effortless for non-technical users. Users should understand the next step without instructions, choose a beautiful design, add event details, see an accurate live preview, save a draft, and share the result.
 
 ## Acceptance criteria
-- [ ] Template gallery shows distinct visual previews and selection state.
-- [ ] Builder is mobile-first, compact, and responsive; mobile users can switch between editing and preview without losing form state.
-- [ ] Desktop layout presents editor and live preview together.
+- [ ] Template gallery feels like a curated premium collection, with expressive visual previews, clear differences, hover/selection feedback, and mobile-friendly cards.
+- [ ] Builder is mobile-first and responsive, but not visually bare: strong typography, refined surfaces, atmospheric backgrounds, tasteful motion, and a clear guided step sequence.
+- [ ] A first-time/non-technical user can complete the flow using plain-language labels, realistic examples, visible progress, and immediate feedback.
+- [ ] Desktop layout presents an editorial-style hero, guided editor, and elevated live preview together.
 - [ ] Preview updates immediately for every editable field and selected template.
 - [ ] Draft can be explicitly saved and restored from the same browser/device.
 - [ ] Share action validates required fields, creates a public invitation URL, and offers a copy fallback when Web Share is unavailable.
 - [ ] Public invitation route renders the selected template variant and safely rejects malformed payloads.
 - [ ] Uzbek, Russian, and English UI labels remain available.
 - [ ] Keyboard focus, labels, status feedback, reduced motion, and narrow viewport behavior are covered.
+- [ ] Visual polish remains usable at 320px, 375px, tablet, and desktop widths.
 - [ ] Typecheck, lint, and production build are run and their outcomes recorded.
 
 ## Implementation notes
