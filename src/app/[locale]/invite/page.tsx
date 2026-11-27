@@ -1,0 +1,76 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
+export const metadata: Metadata = {
+  title: "Digital invitation",
+  robots: { index: false, follow: false },
+};
+
+type Invitation = {
+  type: string;
+  title: string;
+  hosts: string;
+  date: string;
+  time: string;
+  venue: string;
+  address: string;
+  message: string;
+  theme: "sage" | "rose" | "sand";
+};
+
+const translations = {
+  uz: { invite: "SIZNI TAKLIF ETAMIZ", date: "TADBIR SANASI", place: "MANZIL", note: "Sizni kutib qolamiz", back: "Siz ham taklifnoma yarating" },
+  ru: { invite: "ПРИГЛАШАЕМ ВАС", date: "ДАТА СОБЫТИЯ", place: "МЕСТО ПРОВЕДЕНИЯ", note: "Будем рады вас видеть", back: "Создайте своё приглашение" },
+  en: { invite: "YOU ARE INVITED", date: "EVENT DATE", place: "LOCATION", note: "We look forward to seeing you", back: "Create your own invitation" },
+} as const;
+
+function isInvitation(value: unknown): value is Invitation {
+  if (!value || typeof value !== "object") return false;
+  const item = value as Record<string, unknown>;
+  return ["type", "title", "hosts", "date", "time", "venue", "address", "message", "theme"].every((key) => typeof item[key] === "string")
+    && ["sage", "rose", "sand"].includes(String(item.theme))
+    && String(item.title).length <= 90
+    && String(item.message).length <= 220;
+}
+
+export default async function PublicInvitationPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ data?: string }>;
+}) {
+  const [{ locale }, query] = await Promise.all([params, searchParams]);
+  if (!(locale in translations) || !query.data || query.data.length > 5000) notFound();
+
+  let invitation: Invitation;
+  try {
+    const parsed: unknown = JSON.parse(query.data);
+    if (!isInvitation(parsed)) notFound();
+    invitation = parsed;
+  } catch {
+    notFound();
+  }
+
+  const t = translations[locale as keyof typeof translations];
+  const date = new Date(invitation.date + "T12:00:00");
+  const formattedDate = Number.isNaN(date.getTime()) ? invitation.date : new Intl.DateTimeFormat(locale === "uz" ? "uz-UZ" : locale === "ru" ? "ru-RU" : "en-US", { day: "numeric", month: "long", year: "numeric" }).format(date);
+
+  return (
+    <main className="public-invitation-page">
+      <article className={`invitation-preview public-invitation preview-${invitation.theme}`}>
+        <span className="preview-flower">✳</span>
+        <span className="preview-kicker">{t.invite}</span>
+        <h1>{invitation.hosts || invitation.title}</h1>
+        <span className="preview-rule">✧</span>
+        <p className="preview-title">{invitation.title}</p>
+        <strong>{formattedDate}</strong>
+        {invitation.time && <span>{invitation.time}</span>}
+        {(invitation.venue || invitation.address) && <div className="preview-location"><b>{t.place}</b>{invitation.venue && <span>{invitation.venue}</span>}{invitation.address && <small>{invitation.address}</small>}</div>}
+        <p className="preview-message">{invitation.message || t.note}</p>
+      </article>
+      <footer className="public-invite-footer"><span>Astron · Digital invitations</span><Link href={`/${locale}/create`}>{t.back} ↗</Link></footer>
+    </main>
+  );
+}
