@@ -45,6 +45,6 @@ Replace the basic invitation form with a compact, mobile-first invitation studio
 - Evidence: Implemented on `feat/mobile-first-invitation-studio`; draft PR #1 opened.
 - Changed: typed template catalog, mobile-first builder, visual template gallery, local draft save/restore, mobile Edit/Preview switch, public template rendering, responsive styling.
 - Skills consulted: `frontend/react-nextjs-development`, `frontend/ui-ux-accessibility`.
-- Validation: GitHub Actions CI is queued. Local `npm run typecheck`, `npm run lint`, and `npm run build` were not run in this environment.
+- Validation: First CI run passed TypeScript but exposed a React hooks lint issue; fixed by deferring local-draft restoration. A new CI run is currently in progress. Local scripts were not run in this environment.
 - Blockers/risks: Drafts are browser-local only; shared invitation data remains encoded in URL query parameters. This is not cross-device/server persistence.
 - Next step: Wait for CI, run responsive browser QA at mobile/tablet/desktop widths, then request review.
