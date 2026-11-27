@@ -67,3 +67,56 @@ h2{font-family:var(--serif);font-size:clamp(32px,4vw,45px);font-weight:500;lette
 @media(max-width:900px){.hero{padding-left:7%;padding-right:7%;gap:2%}.hero-art{transform:scale(.88)}.occasion-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:640px){.site-header{height:70px;padding:0 5%}.main-nav{display:none}.hero{padding:65px 7% 50px;grid-template-columns:1fr;gap:25px}.hero-copy{max-width:none}h1{font-size:48px}.hero-note{margin-top:38px}.hero-art{height:410px;transform:scale(.82);margin:-12px -30px 0}.art-caption{bottom:-5px;right:10%}.section-wrap{padding-left:7%;padding-right:7%}.occasion-section{padding-top:65px;padding-bottom:75px}.section-heading{display:block}.section-heading>p{margin-top:15px}.occasion-grid{grid-template-columns:repeat(2,1fr)}.occasion-card{height:165px}.how-section{padding:70px 0}.steps-grid{grid-template-columns:1fr;gap:24px}.step-line{margin:12px 0 18px}.site-footer{padding:25px 7%;flex-wrap:wrap}.site-footer p{order:3;width:100%}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important}}
+
+
+/* Invitation builder MVP */
+.builder-page{min-height:100vh;background:#f8f7f2}
+.builder-header{height:76px}
+.builder-back{font-size:12px;color:#667060}
+.builder-intro{max-width:1180px;margin:0 auto;padding:64px 34px 28px}
+.builder-intro .eyebrow{margin-bottom:14px}
+.builder-intro h1{font-size:clamp(38px,4vw,54px);margin-bottom:12px}
+.builder-intro>p:last-child{font-size:13px;color:var(--muted);line-height:1.7}
+.builder-layout{max-width:1180px;margin:0 auto;padding:20px 34px 90px;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.85fr);gap:70px;align-items:start}
+.builder-form{display:flex;flex-direction:column;gap:17px}
+.builder-form label{display:flex;flex-direction:column;gap:8px;font-size:11px;font-weight:600;color:#4d5749}
+.builder-form input,.builder-form select,.builder-form textarea{width:100%;border:1px solid #e1e4da;background:#fffefa;border-radius:2px;padding:13px 14px;font:400 13px var(--sans);color:var(--ink);outline:none;min-height:45px}
+.builder-form textarea{resize:vertical;line-height:1.6}
+.builder-form input:focus,.builder-form select:focus,.builder-form textarea:focus{border-color:#819477;box-shadow:0 0 0 3px rgba(129,148,119,.12)}
+.builder-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.builder-form fieldset{border:0;padding:0;margin:2px 0 4px}
+.builder-form legend{font-size:11px;font-weight:600;color:#4d5749;margin-bottom:12px}
+.theme-options{display:flex;gap:12px}
+.theme-swatch{width:34px;height:34px;border-radius:50%;border:3px solid #f8f7f2;outline:1px solid transparent;cursor:pointer}
+.theme-swatch.selected{outline-color:#5f7158}
+.swatch-sage{background:#dfe7d8}.swatch-rose{background:#eedbd7}.swatch-sand{background:#eee2ce}
+.builder-submit{border:0;cursor:pointer;min-height:52px;align-self:flex-start}
+.builder-notice{font-size:12px;color:#8c594d;margin:0}
+.share-result{padding:14px;background:#edf0e9;border:1px solid #dce3d6;overflow-wrap:anywhere}
+.share-result p{font-size:11px;line-height:1.6;color:#56634f;margin-bottom:10px}
+.share-result button{border:0;background:transparent;text-decoration:underline;text-underline-offset:3px;font:600 11px var(--sans);cursor:pointer;color:#465b42;padding:0}
+.preview-column{position:sticky;top:28px}
+.preview-column>.eyebrow{text-align:center;justify-content:center;margin-bottom:20px}
+.invitation-preview{width:100%;max-width:430px;min-height:570px;margin:0 auto;padding:55px 35px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;box-shadow:0 20px 55px rgba(48,57,43,.09);border:9px solid rgba(255,255,255,.55);outline:1px solid rgba(110,115,95,.18);outline-offset:-18px;color:#53614e}
+.preview-sage{background:#e8ede3;color:#53614e}
+.preview-rose{background:#f1e3df;color:#805d5a}
+.preview-sand{background:#f0e8d9;color:#78664f}
+.preview-flower{font-size:28px;margin-bottom:26px;color:#9aa88e}
+.preview-kicker{font-size:9px;letter-spacing:.24em;margin-bottom:22px}
+.invitation-preview h2,.public-invitation h1{font-family:var(--serif);font-size:clamp(34px,4vw,48px);font-weight:500;line-height:1.15;letter-spacing:-1px;margin:0 0 16px;overflow-wrap:anywhere}
+.preview-rule{font-size:20px;color:#a88c6c;margin-bottom:17px}
+.preview-title{font-family:var(--serif);font-size:18px;line-height:1.4;margin:0 0 25px;max-width:300px}
+.invitation-preview>strong{font-family:var(--serif);font-size:18px;font-weight:500;margin-bottom:8px}
+.invitation-preview>span:not(.preview-flower):not(.preview-kicker):not(.preview-rule){font-size:11px;letter-spacing:.12em}
+.preview-location{display:flex;flex-direction:column;gap:8px;margin-top:30px;max-width:300px}
+.preview-location b{font-size:8px;letter-spacing:.2em;font-weight:600}
+.preview-location span{font-family:var(--serif);font-size:17px}
+.preview-location small{font-size:10px;line-height:1.5;opacity:.75}
+.preview-message{font-family:var(--serif);font-style:italic;font-size:14px;line-height:1.6;margin:28px 0 0;max-width:300px}
+.preview-footnote{text-align:center;color:#92998d;font-size:10px;margin-top:20px}
+.public-invitation-page{min-height:100vh;padding:55px 20px 30px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#f8f7f2}
+.public-invitation{min-height:650px;max-width:470px;width:100%}
+.public-invite-footer{max-width:470px;width:100%;display:flex;justify-content:space-between;gap:16px;margin-top:22px;font-size:10px;color:#838a7d}
+.public-invite-footer a{color:#536b55;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:800px){.builder-layout{grid-template-columns:1fr;gap:45px}.preview-column{position:static;grid-row:1}.preview-column .invitation-preview{max-width:390px;min-height:520px}.builder-intro{padding-top:48px}}
+@media(max-width:540px){.builder-header{padding:0 7%}.builder-intro{padding:42px 7% 18px}.builder-layout{padding:15px 7% 65px}.builder-fields{grid-template-columns:1fr 1fr;gap:10px}.invitation-preview{min-height:500px;padding:48px 25px}.public-invitation-page{padding:25px 14px}.public-invitation{min-height:580px}.public-invite-footer{font-size:9px}}
