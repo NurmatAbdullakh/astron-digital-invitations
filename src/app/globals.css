@@ -985,3 +985,53 @@ h2{font-family:var(--serif);font-size:clamp(32px,4vw,45px);font-weight:500;lette
  .invitation-artwork--compact .artwork-editorial-hero{margin:20px 0 10px}
  .invitation-artwork--compact .artwork-minimal-arch{height:58px;margin:10px auto 7px}
 }
+
+
+/* Actual miniature previews in the template selector */
+.studio-wizard .wizard-template-art{
+ height:clamp(132px,19vh,168px);padding:0;position:relative;overflow:hidden;
+ display:flex;align-items:center;justify-content:center;border:0;background:transparent
+}
+.studio-wizard .wizard-template-art>.invitation-artwork--compact{
+ width:100%;height:100%;min-height:0;max-width:none;aspect-ratio:auto;
+ padding:12px 10px 9px;box-shadow:none;overflow:hidden
+}
+.studio-wizard .wizard-template-art .artwork-frame{inset:6px}
+.studio-wizard .wizard-template-art .artwork-botanical-top,
+.studio-wizard .wizard-template-art .artwork-editorial-top,
+.studio-wizard .wizard-template-art .artwork-minimal-top{font-size:4px}
+.studio-wizard .wizard-template-art .artwork-botanical-flora{height:42px;margin:2px 0}
+.studio-wizard .wizard-template-art .artwork-botanical-ornament{width:90px}
+.studio-wizard .wizard-template-art .preview-kicker{font-size:4px;margin-bottom:4px}
+.studio-wizard .wizard-template-art h1{font-size:16px}
+.studio-wizard .wizard-template-art .preview-title{font-size:7px;margin-top:3px}
+.studio-wizard .wizard-template-art .artwork-botanical-date{margin-top:5px;gap:2px}
+.studio-wizard .wizard-template-art .artwork-botanical-date span,
+.studio-wizard .wizard-template-art .artwork-botanical-date small,
+.studio-wizard .wizard-template-art .artwork-editorial-date span,
+.studio-wizard .wizard-template-art .artwork-editorial-date small,
+.studio-wizard .wizard-template-art .artwork-minimal-date span,
+.studio-wizard .wizard-template-art .artwork-minimal-date small{font-size:3.5px}
+.studio-wizard .wizard-template-art .artwork-botanical-date strong,
+.studio-wizard .wizard-template-art .artwork-minimal-date strong{font-size:9px}
+.studio-wizard .wizard-template-art .artwork-editorial-hero{grid-template-columns:minmax(0,1fr) 30px;margin:17px 0 6px}
+.studio-wizard .wizard-template-art .artwork-editorial-seal{width:29px;height:29px}
+.studio-wizard .wizard-template-art .artwork-seal-letter{font-size:9px}
+.studio-wizard .wizard-template-art .artwork-seal-letter span{font-size:5px}
+.studio-wizard .wizard-template-art .artwork-editorial-seal i{font-size:6px}
+.studio-wizard .wizard-template-art .artwork-editorial-date{padding:4px 0;gap:2px}
+.studio-wizard .wizard-template-art .artwork-editorial-date strong{font-size:9px}
+.studio-wizard .wizard-template-art .artwork-minimal-arch{height:43px;width:34px;margin:7px auto 4px}
+.studio-wizard .wizard-template-art .artwork-minimal-arch i{font-size:13px}
+.studio-wizard .wizard-template-art .artwork-minimal-date{padding:4px 7px;margin-top:5px;gap:2px}
+.studio-wizard .wizard-template-art .artwork-bottomline,
+.studio-wizard .wizard-template-art .artwork-editorial-footer,
+.studio-wizard .wizard-template-art .artwork-minimal-footer{font-size:3.5px;padding-top:4px}
+.studio-wizard .wizard-template-art .preview-location,
+.studio-wizard .wizard-template-art .preview-message{display:none}
+@media(max-width:680px){
+ .studio-wizard .wizard-template-art{height:clamp(110px,17vh,140px)}
+}
+@media(max-width:360px){
+ .studio-wizard .wizard-template-art{height:100px}
+}
