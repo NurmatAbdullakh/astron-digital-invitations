@@ -53,13 +53,14 @@ export default async function TemplatesPage({ params }: { params: Promise<{ loca
                 <b>{templateNames[index]}</b>
               </div>
               <div className="gallery-card-copy"><div><h2>{templateNames[index]}</h2><p>{templateDescriptions[index]}</p></div><span>0{index + 1}</span></div>
-              <div className="gallery-actions">
+              <form className="gallery-actions" action={`/${locale}/create`}>
                 <label htmlFor={`event-${template.id}`}>{item.category}</label>
-                <select id={`event-${template.id}`} defaultValue="wedding" aria-label={item.category}>
+                <select id={`event-${template.id}`} name="type" defaultValue="wedding" aria-label={item.category}>
                   {categories.map((category, categoryIndex) => <option key={category} value={category}>{item.names[categoryIndex]}</option>)}
                 </select>
-                <Link className="button button-primary" href={`/${locale}/create?template=${template.id}`}>{item.create}<span aria-hidden="true">↗</span></Link>
-              </div>
+                <input type="hidden" name="template" value={template.id} />
+                <button className="button button-primary" type="submit">{item.create}<span aria-hidden="true">↗</span></button>
+              </form>
             </article>
           ))}
         </div>
