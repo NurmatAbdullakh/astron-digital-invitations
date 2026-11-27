@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import InvitationArtwork from "@/components/invitations/InvitationArtwork";
 import {
   getInvitationTemplate,
   invitationTemplates,
@@ -48,7 +49,7 @@ const labels = {
   ru: {
     back: "Назад", eyebrow: "ASTRON · DIGITAL INVITATIONS", heading: "Создайте своё приглашение",
     intro: "Всего несколько шагов. Выберите дизайн, добавьте детали и посмотрите результат.",
-    step1: "Дизайн", step2: "Детали", step3: "Просмотр",
+    step1: "Дизайн", step2: "Данные", step3: "Просмотр",
     stepHint: "Какой стиль подойдёт вашему празднику?", event: "Тип события",
     title: "Название приглашения", hosts: "Кого поздравляем?", date: "Дата", time: "Время",
     venue: "Место проведения", address: "Адрес", message: "Пожелание гостям",
@@ -66,7 +67,7 @@ const labels = {
     hostPlaceholder: "Азиза и Мирджалол", venuePlaceholder: "Versal Palace",
     addressPlaceholder: "Ташкент, улица Амира Темура",
     messagePlaceholder: "Разделите с нами этот день!",
-    templateNames: ["Ботаника", "The Classic", "Modern Muse"],
+    templateNames: ["Ботаника", "Классика", "Современный стиль"],
     templateDescriptions: ["Нежные цветы и романтика", "Роскошь классики", "Современно и выразительно"],
     localOnly: "Черновик хранится только в этом браузере.",
     optional: "Необязательно", eventTitle: "О вашем событии",
@@ -205,17 +206,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     <main className="builder-page studio-premium studio-wizard">
       <header className="site-header builder-header wizard-header">
         <a className="brand" href={`/${locale}`}><span className="brand-mark">a.</span><span>astron</span></a>
-        <div className="wizard-brand-center"><span className="wizard-status-dot" /> {t.eyebrow}</div>
-        <a className="builder-back" href={`/${locale}`}>← {t.back}</a>
-      </header>
-
-      <div className="wizard-topline">
-        <div className="wizard-heading">
-          <span className="wizard-eyebrow">{t.eyebrow}</span>
-          <h1>{t.heading}</h1>
-          <p>{t.intro}</p>
-        </div>
-        <nav className="wizard-tabs" role="tablist" aria-label={t.heading}>
+                <nav className="wizard-tabs" role="tablist" aria-label={t.heading}>
           {steps.map((step, index) => (
             <button key={step} type="button" role="tab" aria-selected={activeStep === step}
               aria-controls="wizard-panel" id={`wizard-tab-${step}`}
@@ -234,6 +225,16 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
             </button>
           ))}
         </nav>
+        <a className="builder-back" href={`/${locale}`}>← {t.back}</a>
+      </header>
+
+      <div className="wizard-topline">
+        <div className="wizard-heading">
+          <span className="wizard-eyebrow">{t.eyebrow}</span>
+          <h1>{t.heading}</h1>
+          <p>{t.intro}</p>
+        </div>
+
       </div>
 
       <div className={`wizard-workspace wizard-step-${activeStep}`}>
@@ -339,17 +340,21 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
             <span className="wizard-live-pill"><i /> LIVE</span>
           </div>
           <div className="wizard-preview-canvas">
-            <div className={`wizard-invitation invitation-preview preview-${selectedTemplate.theme} invitation-${form.template}`}>
-              <span className="wizard-invitation-ornament">{selectedTemplate.marker}</span>
-              <span className="preview-kicker">{t.invitation}</span>
-              <h3>{form.hosts || form.title || "Aziza & Mirjalol"}</h3>
-              <span className="wizard-invitation-divider">✳</span>
-              <p className="preview-title">{form.title || eventName}</p>
-              <strong>{dateLabel}</strong>
-              <span>{form.time || "18:00"}</span>
-              <div className="preview-location"><b>{t.location}</b><span>{form.venue || "Versal Palace"}</span><small>{form.address || "Tashkent, Uzbekistan"}</small></div>
-              <p className="preview-message">{form.message || t.note}</p>
-            </div>
+            <InvitationArtwork
+              template={form.template}
+              theme={selectedTemplate.theme}
+              invitationLabel={t.invitation}
+              hosts={form.hosts || form.title || eventName}
+              title={form.title || eventName}
+              date={dateLabel}
+              time={form.time}
+              locationLabel={t.location}
+              venue={form.venue}
+              address={form.address}
+              message={form.message || t.note}
+              footerLabel="ASTRON STUDIO"
+              compact
+            />
           </div>
           <div className="wizard-preview-footer"><span>✦ {t.live}</span><span>ASTRON STUDIO</span></div>
         </aside>
