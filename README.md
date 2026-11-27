@@ -46,7 +46,7 @@ Useful scripts:
 - Interactive invitation builder with live preview
 - Three visual themes and event detail fields
 - Shareable public invitation URL
-- Invitation payload is encoded in the URL query string; there is no database persistence in this MVP
+- Invitation payload is encoded in the URL query string; there is no database persistence in this MVP\n- Local drafts are stored in browser localStorage and are not synced across devices or accounts
 - Payments, accounts, and server-side invitation management are not included yet
 
 ## SEO baseline
