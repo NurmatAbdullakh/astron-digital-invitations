@@ -4,16 +4,54 @@ SEO-first digital invitation platform built with Next.js App Router and TypeScri
 
 ## Product direction
 
-A public-facing, multilingual digital invitation platform for weddings, birthdays, family events, corporate events, graduations, and other occasions.
+A multilingual digital invitation platform for weddings, birthdays, family events, corporate events, graduations, and other occasions.
 
-## Architecture principles
+## Stack
 
-- Public marketing pages, event-type landing pages, and template pages are indexable.
-- Private invitation editor, account, and dashboard routes are excluded from indexing.
-- Server-rendered content and metadata are used for search discovery.
-- Canonical URLs, hreflang, sitemap, robots directives, Open Graph, and JSON-LD are part of the SEO baseline.
-- Search crawler access is explicitly considered, including OAI-SearchBot.
+- Next.js App Router
+- React 19 and TypeScript
+- Server Components and statically generated public pages
+- CSS with responsive layouts
 
-## Development
+## Local development
 
-The application scaffold and implementation are being established in the repository.
+```bash
+npm install
+cp .env.example .env.local
+# Set NEXT_PUBLIC_SITE_URL to your canonical site origin
+npm run dev
+```
+
+Useful scripts:
+
+- `npm run typecheck`
+- `npm run lint`
+- `npm run build`
+- `npm run start`
+
+## Routes
+
+- `/uz`, `/ru`, `/en` — localized homepages
+- `/[locale]/wedding`
+- `/[locale]/birthday`
+- `/[locale]/family`
+- `/[locale]/corporate`
+- `/[locale]/graduation`
+- `/[locale]/templates`
+
+## SEO baseline
+
+- Localized title and description metadata
+- Canonical URLs and language alternates
+- Open Graph metadata
+- XML sitemap at `/sitemap.xml`
+- Robots directives at `/robots.txt`
+- JSON-LD structured data
+- OAI-SearchBot allowed for ChatGPT Search discovery
+- GPTBot configured separately from search crawling
+
+Read [SEO and AI Search Readiness](docs/SEO-AND-AI-SEARCH.md) for production requirements.
+
+## Production configuration
+
+Set `NEXT_PUBLIC_SITE_URL` to the final canonical HTTPS domain before deployment. The current fallback domain is a development placeholder and must be replaced.
