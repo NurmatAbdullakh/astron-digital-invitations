@@ -71,7 +71,7 @@ export default async function EventCategoryPage({ params }: { params: Promise<{ 
     <main className="category-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
       <header className="site-header"><Link className="brand" href={`/${locale}`}><span className="brand-mark">a.</span><span>astron</span></Link><nav className="main-nav"><Link href={`/${locale}`}>{home}</Link><Link href={`/${locale}/create?type=${category}`}>{catalog}</Link></nav><div className="locale-switch">{locales.map((lang) => <Link key={lang} href={`/${lang}/${category}`}>{lang.toUpperCase()}</Link>)}</div></header>
-      <section className="category-hero"><p className="eyebrow">ASTRON DIGITAL INVITATIONS</p><h1>{item[0]}</h1><p className="hero-description">{item[1]}</p><div className="category-panel"><span className="category-flower">✳</span><p>{item[2]}</p><Link className="button button-primary" href={`/${locale}/templates`}>{catalog}<span aria-hidden="true">↗</span></Link></div></section>
+      <section className="category-hero"><p className="eyebrow">ASTRON DIGITAL INVITATIONS</p><h1>{item[0]}</h1><p className="hero-description">{item[1]}</p><div className="category-panel"><span className="category-flower">✳</span><p>{item[2]}</p><Link className="button button-primary" href={`/${locale}/create?type=${category}`}>{catalog}<span aria-hidden="true">↗</span></Link></div></section>
       <footer className="site-footer"><Link className="brand" href={`/${locale}`}><span className="brand-mark">a.</span><span>astron</span></Link><p>{item[1]}</p><span>© {new Date().getFullYear()} Astron</span></footer>
     </main>
   );
