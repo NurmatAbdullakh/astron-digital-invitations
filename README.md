@@ -49,7 +49,7 @@ Useful scripts:
 - Explicit local draft save/restore in the same browser/device
 - Shareable public invitation URL
 - Invitation payload is encoded in the URL query string; there is no database persistence in this MVP
-- Local drafts are stored in browser localStorage and are not synced across devices or accounts\n- Local drafts are stored in browser localStorage and are not synced across devices or accounts
+- Local drafts are stored in browser localStorage and are not synced across devices or accounts
 - Payments, accounts, and server-side invitation management are not included yet
 
 ## SEO baseline
