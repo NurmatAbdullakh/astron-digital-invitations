@@ -43,8 +43,8 @@ Useful scripts:
 
 - Multilingual public pages in Uzbek, Russian, and English
 - Five event categories: wedding, birthday, family, corporate, graduation
-- Mobile-first invitation studio with live preview and compact template selector
-- Three distinct invitation templates: Botanical, Editorial, and Minimal
+- Premium-feeling, guided mobile-first invitation studio with live preview and curated design selection
+- Three distinct invitation styles: Botanical, The Classic, and Modern Muse
 - Event detail fields with localized Uzbek, Russian, and English labels
 - Explicit local draft save/restore in the same browser/device
 - Shareable public invitation URL
