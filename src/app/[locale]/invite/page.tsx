@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import InvitationArtwork from "@/components/invitations/InvitationArtwork";
 import { notFound } from "next/navigation";
 import { isInvitationTemplateId } from "@/lib/invitations/templates";
 
@@ -62,17 +63,19 @@ export default async function PublicInvitationPage({
 
   return (
     <main className="public-invitation-page">
-      <article className={`invitation-preview public-invitation preview-${invitation.theme} invitation-${isInvitationTemplateId(invitation.template) ? invitation.template : "botanical"}`}>
-        <span className="preview-flower">✳</span>
-        <span className="preview-kicker">{t.invite}</span>
-        <h1>{invitation.hosts || invitation.title}</h1>
-        <span className="preview-rule">✧</span>
-        <p className="preview-title">{invitation.title}</p>
-        <strong>{formattedDate}</strong>
-        {invitation.time && <span>{invitation.time}</span>}
-        {(invitation.venue || invitation.address) && <div className="preview-location"><b>{t.place}</b>{invitation.venue && <span>{invitation.venue}</span>}{invitation.address && <small>{invitation.address}</small>}</div>}
-        <p className="preview-message">{invitation.message || t.note}</p>
-      </article>
+      <InvitationArtwork
+        template={isInvitationTemplateId(invitation.template) ? invitation.template : "botanical"}
+        theme={invitation.theme}
+        invitationLabel={t.invite}
+        hosts={invitation.hosts || invitation.title}
+        title={invitation.title}
+        date={formattedDate}
+        time={invitation.time}
+        locationLabel={t.place}
+        venue={invitation.venue}
+        address={invitation.address}
+        message={invitation.message || t.note}
+      />
       <footer className="public-invite-footer"><span>Astron · Digital invitations</span><Link href={`/${locale}/create`}>{t.back} ↗</Link></footer>
     </main>
   );
