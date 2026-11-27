@@ -107,6 +107,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
             setForm({
               ...emptyInvitation(candidate.type),
               ...candidate,
+              type: types.includes(initialType as (typeof types)[number]) ? initialType : candidate.type,
               template: isInvitationTemplateId(initialTemplate) ? initialTemplate : isInvitationTemplateId(candidate.template) ? candidate.template : "botanical",
             });
             setNotice(t.restored);
@@ -129,7 +130,8 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     }).format(date);
   }, [form.date, locale, t.dateLabel]);
 
-  const selectedTemplate = getInvitationTemplate(form.template);\n  const eventName = form.type === "birthday" ? t.birthday : form.type === "family" ? t.family : form.type === "corporate" ? t.corporate : form.type === "graduation" ? t.graduation : t.wedding;
+  const selectedTemplate = getInvitationTemplate(form.template);
+  const eventName = form.type === "birthday" ? t.birthday : form.type === "family" ? t.family : form.type === "corporate" ? t.corporate : form.type === "graduation" ? t.graduation : t.wedding;
 
   function update<K extends keyof Invitation>(key: K, value: Invitation[K]) {
     setForm((current) => ({ ...current, [key]: value }));
