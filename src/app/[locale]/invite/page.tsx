@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { isInvitationTemplateId } from "@/lib/invitations/templates";
 
 export const metadata: Metadata = {
   title: "Digital invitation",
@@ -17,6 +18,7 @@ type Invitation = {
   address: string;
   message: string;
   theme: "sage" | "rose" | "sand";
+  template?: string;
 };
 
 const translations = {
@@ -30,6 +32,7 @@ function isInvitation(value: unknown): value is Invitation {
   const item = value as Record<string, unknown>;
   return ["type", "title", "hosts", "date", "time", "venue", "address", "message", "theme"].every((key) => typeof item[key] === "string")
     && ["sage", "rose", "sand"].includes(String(item.theme))
+    && (item.template === undefined || isInvitationTemplateId(item.template))
     && String(item.title).length <= 90
     && String(item.message).length <= 220;
 }
@@ -59,7 +62,7 @@ export default async function PublicInvitationPage({
 
   return (
     <main className="public-invitation-page">
-      <article className={`invitation-preview public-invitation preview-${invitation.theme}`}>
+      <article className={`invitation-preview public-invitation preview-${invitation.theme} invitation-${isInvitationTemplateId(invitation.template) ? invitation.template : "botanical"}`}>
         <span className="preview-flower">✳</span>
         <span className="preview-kicker">{t.invite}</span>
         <h1>{invitation.hosts || invitation.title}</h1>
