@@ -9,6 +9,7 @@ import {
 } from "@/lib/invitations/templates";
 
 type Locale = "uz" | "ru" | "en";
+type Step = "design" | "details" | "preview";
 type Invitation = {
   type: string; template: InvitationTemplateId; title: string; hosts: string;
   date: string; time: string; venue: string; address: string; message: string;
@@ -16,71 +17,100 @@ type Invitation = {
 
 const labels = {
   uz: {
-    back: "Orqaga", eyebrow: "ASTRON INVITATION STUDIO", heading: "Unutilmas lahzalar uchun o‘zgacha taklifnoma",
-    intro: "Bir necha daqiqada o‘zingizga xos taklifnoma yarating. Dizaynni tanlang, ma’lumotlarni kiriting — qolganini Astron chiroyli ko‘rsatadi.",
-    step1: "Dizaynni tanlang", step2: "Tadbir ma’lumotlari", step3: "Tayyor taklifnoma",
-    stepHint: "O‘zingizga yoqqan uslubni tanlang. Keyin istalgan vaqtda almashtirishingiz mumkin.",
-    event: "Tadbir turi", title: "Taklifnoma sarlavhasi", hosts: "Kimning bayrami?", date: "Sana",
-    time: "Boshlanish vaqti", venue: "Tadbir maskani", address: "To‘liq manzil", message: "Mehmonlarga tilak yoki izoh",
-    templates: "Dizayn kolleksiyasi", preview: "Jonli ko‘rinish", edit: "Tahrirlash", previewTab: "Ko‘rish",
-    save: "Saqlab qo‘yish", saved: "Qoralama ushbu qurilmada saqlandi", restored: "Qoralamangiz qayta tiklandi",
-    share: "Taklifnomani ulashish", required: "Taklifnoma nomi va sanasini kiriting", copied: "Havola nusxalandi",
-    copy: "Havolani nusxalash", shareReady: "Taklifnomangiz tayyor!", draftError: "Saqlash imkoni bo‘lmadi",
-    wedding: "To‘y", birthday: "Tug‘ilgan kun", family: "Oilaviy bayram", corporate: "Korporativ", graduation: "Bitiruv",
-    invitation: "SIZNI TAKLIF ETAMIZ", dateLabel: "BAХTLI KUNIMIZ", location: "MANZIL", note: "Sizni ushbu quvonchli kunimizda kutamiz",
-    placeholder: "Masalan: Aziza va Mirjalolning nikoh oqshomi", hostPlaceholder: "Aziza & Mirjalol",
-    venuePlaceholder: "Versal Palace", addressPlaceholder: "Toshkent shahri, Amir Temur ko‘chasi, 12",
-    messagePlaceholder: "Quvonchimizga sherik bo‘ling!", templateNames: ["Botanika", "The Classic", "Modern Muse"],
-    templateDescriptions: ["Nozik gullar va romantik kayfiyat", "Hashamatli klassika va nafislik", "Zamonaviy uslub va dadil tipografika"],
-    savedLocal: "Qoralama faqat shu brauzerda saqlanadi.", live: "O‘zgarishlar darhol aks etadi",
-    sample: "NAMUNA", choose: "Tanlandi", optional: "Ixtiyoriy", yourDetails: "Sizning tadbiringiz",
+    back: "Orqaga", eyebrow: "ASTRON · DIGITAL INVITATIONS", heading: "Taklifnomangizni yarating",
+    intro: "Bir necha oson qadamda. Dizaynni tanlang, ma’lumotlarni kiriting va natijani ko‘ring.",
+    step1: "Dizayn", step2: "Ma’lumotlar", step3: "Ko‘rib chiqish",
+    stepHint: "Qaysi uslub sizning bayramingizga mos?", event: "Tadbir turi",
+    title: "Taklifnoma nomi", hosts: "Kimning bayrami?", date: "Sana", time: "Vaqt",
+    venue: "Tadbir maskani", address: "Manzil", message: "Mehmonlarga tilak",
+    templates: "O‘z uslubingizni tanlang", preview: "Jonli preview", edit: "Tahrirlash",
+    save: "Qoralamani saqlash", saved: "Qoralama ushbu qurilmada saqlandi",
+    restored: "Qoralamangiz tiklandi", share: "Taklifnomani yaratish",
+    required: "Taklifnoma nomi va sanasini kiriting", copied: "Havola nusxalandi",
+    copy: "Havolani nusxalash", shareReady: "Taklifnomangiz tayyor!",
+    draftError: "Saqlash imkoni bo‘lmadi", next: "Davom etish", previous: "Ortga",
+    wedding: "To‘y", birthday: "Tug‘ilgan kun", family: "Oilaviy bayram",
+    corporate: "Korporativ", graduation: "Bitiruv",
+    invitation: "SIZNI TAKLIF ETAMIZ", dateLabel: "BAХTLI KUNIMIZ",
+    location: "MANZIL", note: "Sizni ushbu quvonchli kunimizda kutamiz",
+    placeholder: "Masalan: Aziza va Mirjalolning nikoh oqshomi",
+    hostPlaceholder: "Aziza & Mirjalol", venuePlaceholder: "Versal Palace",
+    addressPlaceholder: "Toshkent shahri, Amir Temur ko‘chasi",
+    messagePlaceholder: "Quvonchimizga sherik bo‘ling!",
+    templateNames: ["Botanika", "The Classic", "Modern Muse"],
+    templateDescriptions: ["Nozik gullar va romantika", "Hashamatli klassika", "Zamonaviy va dadil"],
+    localOnly: "Qoralama faqat shu brauzerda saqlanadi.",
+    optional: "Ixtiyoriy", eventTitle: "Bayramingiz haqida",
+    finishTitle: "Hammasi tayyor!", finishText: "Taklifnomangizni tekshiring va yaqinlaringiz bilan ulashing.",
+    change: "O‘zgartirish", selected: "Tanlandi", sample: "NAMUNA",
+    live: "Jonli ko‘rinish", designHelp: "Har bir shablonni tanlab ko‘ring — preview darhol yangilanadi.",
   },
   ru: {
-    back: "Назад", eyebrow: "ASTRON INVITATION STUDIO", heading: "Приглашение, которое запомнится",
-    intro: "Создайте особенное приглашение за несколько минут. Выберите стиль, добавьте детали — Astron позаботится о красоте.",
-    step1: "Выберите дизайн", step2: "Детали события", step3: "Готовое приглашение",
-    stepHint: "Выберите стиль по душе. Его можно изменить в любой момент.",
-    event: "Тип события", title: "Заголовок приглашения", hosts: "Кого поздравляем?", date: "Дата",
-    time: "Время начала", venue: "Место проведения", address: "Полный адрес", message: "Пожелание гостям",
-    templates: "Коллекция дизайнов", preview: "Предпросмотр", edit: "Редактировать", previewTab: "Просмотр",
-    save: "Сохранить", saved: "Черновик сохранён на устройстве", restored: "Черновик восстановлен",
-    share: "Поделиться приглашением", required: "Укажите название приглашения и дату", copied: "Ссылка скопирована",
-    copy: "Скопировать ссылку", shareReady: "Ваше приглашение готово!", draftError: "Не удалось сохранить черновик",
-    wedding: "Свадьба", birthday: "День рождения", family: "Семейный праздник", corporate: "Корпоратив", graduation: "Выпускной",
-    invitation: "ПРИГЛАШАЕМ ВАС", dateLabel: "НАШ ОСОБЕННЫЙ ДЕНЬ", location: "МЕСТО", note: "Будем счастливы разделить этот день с вами",
-    placeholder: "Например: Свадьба Азизы и Мирджалола", hostPlaceholder: "Азиза и Мирджалол",
-    venuePlaceholder: "Versal Palace", addressPlaceholder: "Ташкент, улица Амира Темура, 12",
-    messagePlaceholder: "Разделите с нами этот день!", templateNames: ["Ботаника", "The Classic", "Modern Muse"],
-    templateDescriptions: ["Нежные цветы и романтика", "Роскошная классика и элегантность", "Современный стиль и выразительная типографика"],
-    savedLocal: "Черновик хранится только в этом браузере.", live: "Изменения видны сразу",
-    sample: "ПРИМЕР", choose: "Выбрано", optional: "Необязательно", yourDetails: "Ваше событие",
+    back: "Назад", eyebrow: "ASTRON · DIGITAL INVITATIONS", heading: "Создайте своё приглашение",
+    intro: "Всего несколько шагов. Выберите дизайн, добавьте детали и посмотрите результат.",
+    step1: "Дизайн", step2: "Детали", step3: "Просмотр",
+    stepHint: "Какой стиль подойдёт вашему празднику?", event: "Тип события",
+    title: "Название приглашения", hosts: "Кого поздравляем?", date: "Дата", time: "Время",
+    venue: "Место проведения", address: "Адрес", message: "Пожелание гостям",
+    templates: "Выберите свой стиль", preview: "Предпросмотр", edit: "Изменить",
+    save: "Сохранить черновик", saved: "Черновик сохранён на устройстве",
+    restored: "Черновик восстановлен", share: "Создать приглашение",
+    required: "Укажите название приглашения и дату", copied: "Ссылка скопирована",
+    copy: "Скопировать ссылку", shareReady: "Ваше приглашение готово!",
+    draftError: "Не удалось сохранить черновик", next: "Продолжить", previous: "Назад",
+    wedding: "Свадьба", birthday: "День рождения", family: "Семейный праздник",
+    corporate: "Корпоратив", graduation: "Выпускной",
+    invitation: "ПРИГЛАШАЕМ ВАС", dateLabel: "НАШ ОСОБЕННЫЙ ДЕНЬ",
+    location: "МЕСТО", note: "Будем счастливы разделить этот день с вами",
+    placeholder: "Например: Свадьба Азизы и Мирджалола",
+    hostPlaceholder: "Азиза и Мирджалол", venuePlaceholder: "Versal Palace",
+    addressPlaceholder: "Ташкент, улица Амира Темура",
+    messagePlaceholder: "Разделите с нами этот день!",
+    templateNames: ["Ботаника", "The Classic", "Modern Muse"],
+    templateDescriptions: ["Нежные цветы и романтика", "Роскошь классики", "Современно и выразительно"],
+    localOnly: "Черновик хранится только в этом браузере.",
+    optional: "Необязательно", eventTitle: "О вашем событии",
+    finishTitle: "Всё готово!", finishText: "Проверьте приглашение и поделитесь им с близкими.",
+    change: "Изменить", selected: "Выбрано", sample: "ПРИМЕР",
+    live: "Предпросмотр онлайн", designHelp: "Выберите шаблон — предпросмотр обновится сразу.",
   },
   en: {
-    back: "Back", eyebrow: "ASTRON INVITATION STUDIO", heading: "An invitation made for your special moment",
-    intro: "Create a beautiful invitation in minutes. Pick a style, add your details, and let Astron bring it to life.",
-    step1: "Choose a design", step2: "Event details", step3: "Your invitation",
-    stepHint: "Choose the style you love. You can change it any time.",
-    event: "Event type", title: "Invitation title", hosts: "Who is celebrating?", date: "Date",
-    time: "Start time", venue: "Venue", address: "Full address", message: "A note for your guests",
-    templates: "The design collection", preview: "Live preview", edit: "Edit details", previewTab: "Preview",
-    save: "Save draft", saved: "Draft saved on this device", restored: "Your draft was restored",
-    share: "Share invitation", required: "Please add an invitation title and date", copied: "Link copied",
-    copy: "Copy invitation link", shareReady: "Your invitation is ready!", draftError: "Could not save this draft",
-    wedding: "Wedding", birthday: "Birthday", family: "Family celebration", corporate: "Corporate", graduation: "Graduation",
-    invitation: "YOU ARE INVITED", dateLabel: "OUR SPECIAL DAY", location: "LOCATION", note: "We would love to celebrate with you",
-    placeholder: "e.g. Aziza & Mirjalol’s wedding", hostPlaceholder: "Aziza & Mirjalol",
-    venuePlaceholder: "Versal Palace", addressPlaceholder: "Tashkent, Amir Temur street, 12",
-    messagePlaceholder: "It would mean a lot to celebrate with you!", templateNames: ["Botanical", "The Classic", "Modern Muse"],
-    templateDescriptions: ["Delicate florals and romance", "Timeless luxury and elegance", "Modern style and expressive type"],
-    savedLocal: "Drafts are stored only in this browser.", live: "Changes appear instantly",
-    sample: "SAMPLE", choose: "Selected", optional: "Optional", yourDetails: "Your event",
+    back: "Back", eyebrow: "ASTRON · DIGITAL INVITATIONS", heading: "Create your invitation",
+    intro: "Just a few easy steps. Pick a design, add your details and see it come to life.",
+    step1: "Design", step2: "Details", step3: "Preview",
+    stepHint: "Choose the look that feels right for your celebration.", event: "Event type",
+    title: "Invitation title", hosts: "Who is celebrating?", date: "Date", time: "Time",
+    venue: "Venue", address: "Address", message: "A note for your guests",
+    templates: "Choose your signature style", preview: "Live preview", edit: "Edit details",
+    save: "Save draft", saved: "Draft saved on this device",
+    restored: "Your draft was restored", share: "Create invitation",
+    required: "Please add an invitation title and date", copied: "Link copied",
+    copy: "Copy invitation link", shareReady: "Your invitation is ready!",
+    draftError: "Could not save this draft", next: "Continue", previous: "Back",
+    wedding: "Wedding", birthday: "Birthday", family: "Family celebration",
+    corporate: "Corporate", graduation: "Graduation",
+    invitation: "YOU ARE INVITED", dateLabel: "OUR SPECIAL DAY",
+    location: "LOCATION", note: "We would love to celebrate with you",
+    placeholder: "e.g. Aziza & Mirjalol’s wedding",
+    hostPlaceholder: "Aziza & Mirjalol", venuePlaceholder: "Versal Palace",
+    addressPlaceholder: "Tashkent, Amir Temur street",
+    messagePlaceholder: "It would mean a lot to celebrate with you!",
+    templateNames: ["Botanical", "The Classic", "Modern Muse"],
+    templateDescriptions: ["Delicate florals and romance", "Timeless luxury", "Modern and expressive"],
+    localOnly: "Drafts are stored only in this browser.",
+    optional: "Optional", eventTitle: "About your event",
+    finishTitle: "It's ready!", finishText: "Review your invitation and share it with your guests.",
+    change: "Make changes", selected: "Selected", sample: "SAMPLE",
+    live: "Live preview", designHelp: "Choose a template — the preview updates instantly.",
   },
 } as const;
 
 const types = ["wedding", "birthday", "family", "corporate", "graduation"] as const;
+const steps: Step[] = ["design", "details", "preview"];
 const emptyInvitation = (type: string): Invitation => ({
   type: types.includes(type as (typeof types)[number]) ? type : "wedding",
-  template: "botanical", title: "", hosts: "", date: "", time: "18:00", venue: "", address: "", message: "",
+  template: "botanical", title: "", hosts: "", date: "", time: "18:00",
+  venue: "", address: "", message: "",
 });
 
 export default function InvitationBuilder({ locale, initialType, initialTemplate }: {
@@ -91,9 +121,9 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     ...emptyInvitation(initialType),
     template: isInvitationTemplateId(initialTemplate) ? initialTemplate : "botanical",
   }));
+  const [activeStep, setActiveStep] = useState<Step>("design");
   const [shareUrl, setShareUrl] = useState("");
   const [notice, setNotice] = useState("");
-  const [activeView, setActiveView] = useState<"edit" | "preview">("edit");
   const [draftLoaded, setDraftLoaded] = useState(false);
 
   useEffect(() => {
@@ -134,6 +164,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
 
   const selectedTemplate = getInvitationTemplate(form.template);
   const eventName = form.type === "birthday" ? t.birthday : form.type === "family" ? t.family : form.type === "corporate" ? t.corporate : form.type === "graduation" ? t.graduation : t.wedding;
+  const currentIndex = steps.indexOf(activeStep);
 
   function update<K extends keyof Invitation>(key: K, value: Invitation[K]) {
     setForm((current) => ({ ...current, [key]: value }));
@@ -150,118 +181,192 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     catch { setNotice(url); }
   }
   async function createLink() {
-    if (!form.title.trim() || !form.date) { setNotice(t.required); setActiveView("edit"); return; }
+    if (!form.title.trim() || !form.date) {
+      setNotice(t.required); setActiveStep("details"); return;
+    }
     const url = new URL(`/${locale}/invite`, window.location.origin);
     url.searchParams.set("data", JSON.stringify({ ...form, theme: selectedTemplate.theme }));
     if (url.toString().length > 5000) {
       setNotice(locale === "uz" ? "Ma’lumotlar hajmi katta. Matnni qisqartiring." : locale === "ru" ? "Слишком много данных. Сократите текст." : "Invitation is too large. Please shorten the text.");
       return;
     }
-    setShareUrl(url.toString()); setNotice(t.shareReady);
+    setShareUrl(url.toString());
+    setNotice(t.shareReady);
+    setActiveStep("preview");
     if (navigator.share) {
       try { await navigator.share({ title: form.title, text: form.message || t.note, url: url.toString() }); }
       catch { /* Keep the link available for manual copy. */ }
-    } else { await copyLink(url.toString()); }
+    }
   }
 
+  const stepNames = [t.step1, t.step2, t.step3];
+  const stepIcons = ["✦", "02", "03"];
+
   return (
-    <main className="builder-page studio-premium">
-      <header className="site-header builder-header">
+    <main className="builder-page studio-premium studio-wizard">
+      <header className="site-header builder-header wizard-header">
         <a className="brand" href={`/${locale}`}><span className="brand-mark">a.</span><span>astron</span></a>
-        <div className="studio-header-center"><span className="studio-live-dot" /> {t.live}</div>
+        <div className="wizard-brand-center"><span className="wizard-status-dot" /> {t.eyebrow}</div>
         <a className="builder-back" href={`/${locale}`}>← {t.back}</a>
       </header>
 
-      <section className="builder-intro studio-hero">
-        <div className="studio-hero-copy">
-          <p className="eyebrow"><span />{t.eyebrow}</p>
+      <div className="wizard-topline">
+        <div className="wizard-heading">
+          <span className="wizard-eyebrow">{t.eyebrow}</span>
           <h1>{t.heading}</h1>
           <p>{t.intro}</p>
-          <div className="studio-progress" aria-label="Creation steps">
-            <span className="is-current"><i>01</i>{t.step1}</span><b />
-            <span><i>02</i>{t.step2}</span><b />
-            <span><i>03</i>{t.step3}</span>
-          </div>
         </div>
-        <div className="studio-hero-art" aria-hidden="true">
-          <div className="studio-art-glow" />
-          <div className="studio-art-card studio-art-card-back"><span>THE ART OF CELEBRATING</span><strong>Save<br />the date</strong><i>✳</i></div>
-          <div className="studio-art-card studio-art-card-front"><small>AN INVITATION</small><strong>Aziza <em>&</em><br />Mirjalol</strong><span>12 · 06 · 2027</span><i>✦</i></div>
-          <span className="studio-art-spark studio-spark-one">✦</span><span className="studio-art-spark studio-spark-two">✧</span>
-        </div>
-      </section>
-
-      <div className="studio-toolbar" role="tablist" aria-label={t.preview}>
-        <button type="button" role="tab" aria-selected={activeView === "edit"} className={activeView === "edit" ? "active" : ""} onClick={() => setActiveView("edit")}>{t.edit}</button>
-        <button type="button" role="tab" aria-selected={activeView === "preview"} className={activeView === "preview" ? "active" : ""} onClick={() => setActiveView("preview")}>{t.previewTab}</button>
+        <nav className="wizard-tabs" role="tablist" aria-label={t.heading}>
+          {steps.map((step, index) => (
+            <button key={step} type="button" role="tab" aria-selected={activeStep === step}
+              aria-controls={`wizard-panel-${step}`} id={`wizard-tab-${step}`}
+              className={`wizard-tab ${activeStep === step ? "is-active" : ""} ${currentIndex > index ? "is-complete" : ""}`}
+              onClick={() => setActiveStep(step)}>
+              <span className="wizard-tab-number">{currentIndex > index ? "✓" : `0${index + 1}`}</span>
+              <span>{stepNames[index]}</span>
+            </button>
+          ))}
+        </nav>
       </div>
 
-      <div className={`builder-layout studio-layout view-${activeView}`}>
-        <section className="builder-form studio-form" aria-label={t.edit}>
-          <div className="studio-step-heading"><span>01</span><div><p className="eyebrow">{t.step1}</p><h2>{t.templates}</h2><small>{t.stepHint}</small></div></div>
-          <div className="template-picker studio-template-picker">
-            {invitationTemplates.map((template, index) => (
-              <button type="button" key={template.id} className={`template-choice studio-template-card template-card-${template.id} ${form.template === template.id ? "selected" : ""}`}
-                aria-pressed={form.template === template.id} onClick={() => update("template", template.id)}>
-                <span className={`template-mini template-mini-${template.id}`} aria-hidden="true">
-                  <i>{template.marker}</i><b>{form.hosts || "Aziza & Mirjalol"}</b><small>12 · 06 · 2027</small><em>{t.sample}</em>
-                </span>
-                <span className="template-choice-copy"><strong>{t.templateNames[index]}</strong><small>{t.templateDescriptions[index]}</small></span>
-                {form.template === template.id && <span className="template-check" aria-label={t.choose}>✓</span>}
-              </button>
-            ))}
-          </div>
-
-          <div className="studio-step-heading studio-details-heading"><span>02</span><div><p className="eyebrow">{t.step2}</p><h2>{t.yourDetails}</h2><small>{t.intro.split(".")[0]}.</small></div></div>
-          <div className="studio-form-card">
-            <label>{t.event}
-              <select value={form.type} onChange={(e) => update("type", e.target.value)}>
-                {types.map((type) => <option value={type} key={type}>{t[type]}</option>)}
-              </select>
-            </label>
-            <label>{t.title}
-              <input value={form.title} onChange={(e) => update("title", e.target.value)} placeholder={t.placeholder} maxLength={90} required />
-            </label>
-            <label>{t.hosts}
-              <input value={form.hosts} onChange={(e) => update("hosts", e.target.value)} placeholder={t.hostPlaceholder} maxLength={70} />
-            </label>
-            <div className="builder-fields">
-              <label>{t.date}<input type="date" value={form.date} onChange={(e) => update("date", e.target.value)} required /></label>
-              <label>{t.time}<input type="time" value={form.time} onChange={(e) => update("time", e.target.value)} /></label>
+      <div className={`wizard-workspace wizard-step-${activeStep}`}>
+        <section className="wizard-main-panel" role="tabpanel" id={`wizard-panel-${activeStep}`} aria-labelledby={`wizard-tab-${activeStep}`}>
+          {activeStep === "design" && (
+            <div className="wizard-step-content design-step">
+              <div className="wizard-section-title">
+                <span className="wizard-kicker">01 / THE LOOK</span>
+                <h2>{t.templates}</h2>
+                <p>{t.designHelp}</p>
+              </div>
+              <div className="wizard-event-picker">
+                <span>{t.event}</span>
+                <div className="event-chips">
+                  {types.map((type) => (
+                    <button key={type} type="button" className={form.type === type ? "is-selected" : ""}
+                      aria-pressed={form.type === type} onClick={() => update("type", type)}>
+                      {t[type]}
+                    </button>
+                  ))}
+                </div>
+              </div>
+              <div className="wizard-template-grid">
+                {invitationTemplates.map((template, index) => (
+                  <button type="button" key={template.id}
+                    className={`wizard-template template-card-${template.id} ${form.template === template.id ? "is-selected" : ""}`}
+                    aria-pressed={form.template === template.id} onClick={() => update("template", template.id)}>
+                    <span className={`wizard-template-art template-mini template-mini-${template.id}`} aria-hidden="true">
+                      <i>{template.marker}</i><b>{form.hosts || "Aziza & Mirjalol"}</b><small>12 · 06 · 2027</small><em>{t.sample}</em>
+                    </span>
+                    <span className="wizard-template-meta"><strong>{t.templateNames[index]}</strong><small>{t.templateDescriptions[index]}</small></span>
+                    <span className="wizard-template-check">{form.template === template.id ? "✓" : "+"}</span>
+                  </button>
+                ))}
+              </div>
             </div>
-            <label>{t.venue}<input value={form.venue} onChange={(e) => update("venue", e.target.value)} placeholder={t.venuePlaceholder} maxLength={80} /></label>
-            <label>{t.address}<input value={form.address} onChange={(e) => update("address", e.target.value)} placeholder={t.addressPlaceholder} maxLength={140} /></label>
-            <label>{t.message}<span className="studio-optional">{t.optional}</span><textarea value={form.message} onChange={(e) => update("message", e.target.value)} placeholder={t.messagePlaceholder} rows={3} maxLength={220} /></label>
-            <p className="draft-hint"><span>↳</span> {t.savedLocal}</p>
-            {draftLoaded && notice && <p className="builder-notice" role="status">{notice}</p>}
-            {shareUrl && <div className="share-result"><p>{t.shareReady}</p><a href={shareUrl} target="_blank" rel="noreferrer">{shareUrl}</a><button type="button" onClick={() => void copyLink(shareUrl)}>{t.copy}</button></div>}
-          </div>
+          )}
+
+          {activeStep === "details" && (
+            <div className="wizard-step-content details-step">
+              <div className="wizard-section-title">
+                <span className="wizard-kicker">02 / THE DETAILS</span>
+                <h2>{t.eventTitle}</h2>
+                <p>{t.intro}</p>
+              </div>
+              <div className="wizard-fields">
+                <label className="field-wide">{t.title}
+                  <input value={form.title} onChange={(e) => update("title", e.target.value)} placeholder={t.placeholder} maxLength={90} required />
+                </label>
+                <label>{t.hosts}
+                  <input value={form.hosts} onChange={(e) => update("hosts", e.target.value)} placeholder={t.hostPlaceholder} maxLength={70} />
+                </label>
+                <label>{t.date}
+                  <input type="date" value={form.date} onChange={(e) => update("date", e.target.value)} required />
+                </label>
+                <label>{t.time}
+                  <input type="time" value={form.time} onChange={(e) => update("time", e.target.value)} />
+                </label>
+                <label>{t.venue}
+                  <input value={form.venue} onChange={(e) => update("venue", e.target.value)} placeholder={t.venuePlaceholder} maxLength={80} />
+                </label>
+                <label>{t.address}
+                  <input value={form.address} onChange={(e) => update("address", e.target.value)} placeholder={t.addressPlaceholder} maxLength={140} />
+                </label>
+                <label className="field-wide wizard-message-field">{t.message} <small>{t.optional}</small>
+                  <input value={form.message} onChange={(e) => update("message", e.target.value)} placeholder={t.messagePlaceholder} maxLength={220} />
+                </label>
+              </div>
+              {notice && <p className="wizard-notice" role="status">{notice}</p>}
+              <p className="wizard-local-note"><span>↗</span>{t.localOnly}</p>
+            </div>
+          )}
+
+          {activeStep === "preview" && (
+            <div className="wizard-step-content finish-step">
+              <span className="wizard-finish-icon">✦</span>
+              <span className="wizard-kicker">03 / READY TO SHARE</span>
+              <h2>{t.finishTitle}</h2>
+              <p>{t.finishText}</p>
+              <div className="wizard-finish-summary">
+                <span>{t.templateNames[invitationTemplates.findIndex((item) => item.id === form.template)]}</span>
+                <b>{form.title || eventName}</b>
+                <small>{form.date ? dateLabel : t.dateLabel} · {form.time}</small>
+              </div>
+              {notice && <p className="wizard-notice" role="status">{notice}</p>}
+              {shareUrl ? (
+                <div className="wizard-share-result">
+                  <label htmlFor="invitation-share-url">{t.shareReady}</label>
+                  <input id="invitation-share-url" readOnly value={shareUrl} onFocus={(e) => e.currentTarget.select()} />
+                  <button type="button" onClick={() => void copyLink(shareUrl)}>{t.copy} ↗</button>
+                </div>
+              ) : (
+                <button type="button" className="wizard-create-button" onClick={() => void createLink()}>{t.share} <span>↗</span></button>
+              )}
+              <button type="button" className="wizard-edit-link" onClick={() => setActiveStep("details")}>← {t.change}</button>
+            </div>
+          )}
         </section>
 
-        <aside className="preview-column studio-preview-column" aria-label={t.preview}>
-          <div className="preview-panel-heading"><div><p className="eyebrow">{t.step3}</p><h2>{t.preview}</h2></div><span><i /> LIVE</span></div>
-          <div className="studio-preview-stage">
-            <div className={`invitation-preview preview-${selectedTemplate.theme} invitation-${form.template}`}>
-              <span className="preview-flower">{selectedTemplate.marker}</span>
+        <aside className="wizard-preview-panel" aria-label={t.preview}>
+          <div className="wizard-preview-head">
+            <div><span className="wizard-kicker">YOUR DESIGN, LIVE</span><h2>{t.preview}</h2></div>
+            <span className="wizard-live-pill"><i /> LIVE</span>
+          </div>
+          <div className="wizard-preview-canvas">
+            <div className={`wizard-invitation invitation-preview preview-${selectedTemplate.theme} invitation-${form.template}`}>
+              <span className="wizard-invitation-ornament">{selectedTemplate.marker}</span>
               <span className="preview-kicker">{t.invitation}</span>
-              <h2>{form.hosts || form.title || "Aziza & Mirjalol"}</h2>
-              <span className="preview-rule">✧</span>
+              <h3>{form.hosts || form.title || "Aziza & Mirjalol"}</h3>
+              <span className="wizard-invitation-divider">✳</span>
               <p className="preview-title">{form.title || eventName}</p>
               <strong>{dateLabel}</strong>
               <span>{form.time || "18:00"}</span>
               <div className="preview-location"><b>{t.location}</b><span>{form.venue || "Versal Palace"}</span><small>{form.address || "Tashkent, Uzbekistan"}</small></div>
               <p className="preview-message">{form.message || t.note}</p>
             </div>
-            <span className="preview-stage-caption">ASTRON · DIGITAL INVITATIONS</span>
           </div>
-          <div className="preview-trust-row"><span>✦ {t.live}</span><span>♡ Made with care</span></div>
+          <div className="wizard-preview-footer"><span>✦ {t.live}</span><span>ASTRON STUDIO</span></div>
         </aside>
       </div>
 
-      <div className="studio-bottom-bar">
-        <button className="studio-save" type="button" onClick={saveDraft}>{t.save}</button>
-        <button className="button button-primary studio-share" type="button" onClick={() => void createLink()}>{t.share}<span aria-hidden="true">↗</span></button>
-      </div>
+      <footer className="wizard-actionbar">
+        <div className="wizard-action-left">
+          <button type="button" className="wizard-save-button" onClick={saveDraft}>{t.save}</button>
+          {draftLoaded && notice && activeStep !== "details" && activeStep !== "preview" && <span role="status">{notice}</span>}
+        </div>
+        <div className="wizard-action-right">
+          {currentIndex > 0 && <button type="button" className="wizard-back-button" onClick={() => setActiveStep(steps[currentIndex - 1])}>← {t.previous}</button>}
+          {activeStep !== "preview" ? (
+            <button type="button" className="wizard-next-button" onClick={() => {
+              if (activeStep === "details" && (!form.title.trim() || !form.date)) { setNotice(t.required); return; }
+              setNotice(""); setActiveStep(steps[currentIndex + 1]);
+            }}>{t.next} <span>→</span></button>
+          ) : !shareUrl ? (
+            <button type="button" className="wizard-next-button" onClick={() => void createLink()}>{t.share} <span>↗</span></button>
+          ) : (
+            <button type="button" className="wizard-next-button" onClick={() => void copyLink(shareUrl)}>{t.copy} <span>↗</span></button>
+          )}
+        </div>
+      </footer>
     </main>
   );
 }
