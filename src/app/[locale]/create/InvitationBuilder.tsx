@@ -262,7 +262,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
                   <button type="button" key={template.id}
                     className={`wizard-template template-card-${template.id} ${form.template === template.id ? "is-selected" : ""}`}
                     aria-pressed={form.template === template.id} onClick={() => update("template", template.id)}>
-                    <span className={`wizard-template-art template-mini template-mini-${template.id}`} aria-hidden="true">
+                    <div className={`wizard-template-art template-mini template-mini-${template.id}`} aria-hidden="true">
                       <InvitationArtwork
                         template={template.id}
                         theme={template.theme}
@@ -278,7 +278,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
                         message={form.message || t.note}
                         compact
                       />
-                    </span>
+                    </div>
                     <span className="wizard-template-meta"><strong>{t.templateNames[index]}</strong><small>{t.templateDescriptions[index]}</small></span>
                     <span className="wizard-template-check">{form.template === template.id ? "✓" : "+"}</span>
                   </button>
