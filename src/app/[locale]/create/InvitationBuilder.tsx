@@ -97,6 +97,9 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
   const [draftLoaded, setDraftLoaded] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+    let restored: Invitation | undefined;
+
     try {
       const raw = window.localStorage.getItem(`astron:invitation-draft:${locale}`);
       if (raw) {
@@ -104,21 +107,31 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
         if (parsed && typeof parsed === "object") {
           const candidate = parsed as Partial<Invitation>;
           if (typeof candidate.title === "string" && typeof candidate.type === "string") {
-            setForm({
+            restored = {
               ...emptyInvitation(candidate.type),
               ...candidate,
               type: types.includes(initialType as (typeof types)[number]) ? initialType : candidate.type,
               template: isInvitationTemplateId(initialTemplate) ? initialTemplate : isInvitationTemplateId(candidate.template) ? candidate.template : "botanical",
-            });
-            setNotice(t.restored);
+            };
           }
         }
       }
     } catch {
       // Ignore unavailable or malformed local drafts and keep the clean builder.
-    } finally {
-      setDraftLoaded(true);
     }
+
+    queueMicrotask(() => {
+      if (cancelled) return;
+      if (restored) {
+        setForm(restored);
+        setNotice(t.restored);
+      }
+      setDraftLoaded(true);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [initialTemplate, initialType, locale, t.restored]);
 
   const dateLabel = useMemo(() => {
