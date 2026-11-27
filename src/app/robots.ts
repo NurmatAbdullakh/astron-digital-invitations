@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
-const privatePaths = ["/dashboard/", "/account/", "/api/", "/editor/"];
+const privatePaths = ["/dashboard/", "/account/", "/api/", "/editor/", "/create/", "/invite/"];
 
 export default function robots(): MetadataRoute.Robots {
   return {
