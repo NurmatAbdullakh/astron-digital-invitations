@@ -32,7 +32,7 @@ const labels = {
     venuePlaceholder: "Versal Palace", addressPlaceholder: "Toshkent shahri, Amir Temur ko‘chasi, 12",
     messagePlaceholder: "Quvonchimizga sherik bo‘ling!", templateNames: ["Botanika", "The Classic", "Modern Muse"],
     templateDescriptions: ["Nozik gullar va romantik kayfiyat", "Hashamatli klassika va nafislik", "Zamonaviy uslub va dadil tipografika"],
-    savedLocal: "Qoralama avtomatik ravishda shu brauzerda saqlanadi.", live: "O‘zgarishlar darhol aks etadi",
+    savedLocal: "Qoralama faqat shu brauzerda saqlanadi.", live: "O‘zgarishlar darhol aks etadi",
     sample: "NAMUNA", choose: "Tanlandi", optional: "Ixtiyoriy", yourDetails: "Sizning tadbiringiz",
   },
   ru: {
@@ -52,7 +52,7 @@ const labels = {
     venuePlaceholder: "Versal Palace", addressPlaceholder: "Ташкент, улица Амира Темура, 12",
     messagePlaceholder: "Разделите с нами этот день!", templateNames: ["Ботаника", "The Classic", "Modern Muse"],
     templateDescriptions: ["Нежные цветы и романтика", "Роскошная классика и элегантность", "Современный стиль и выразительная типографика"],
-    savedLocal: "Черновик автоматически хранится в этом браузере.", live: "Изменения видны сразу",
+    savedLocal: "Черновик хранится только в этом браузере.", live: "Изменения видны сразу",
     sample: "ПРИМЕР", choose: "Выбрано", optional: "Необязательно", yourDetails: "Ваше событие",
   },
   en: {
@@ -72,7 +72,7 @@ const labels = {
     venuePlaceholder: "Versal Palace", addressPlaceholder: "Tashkent, Amir Temur street, 12",
     messagePlaceholder: "It would mean a lot to celebrate with you!", templateNames: ["Botanical", "The Classic", "Modern Muse"],
     templateDescriptions: ["Delicate florals and romance", "Timeless luxury and elegance", "Modern style and expressive type"],
-    savedLocal: "Your draft is automatically stored in this browser.", live: "Changes appear instantly",
+    savedLocal: "Drafts are stored only in this browser.", live: "Changes appear instantly",
     sample: "SAMPLE", choose: "Selected", optional: "Optional", yourDetails: "Your event",
   },
 } as const;
