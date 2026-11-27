@@ -39,6 +39,16 @@ Useful scripts:
 - `/[locale]/graduation`
 - `/[locale]/templates`
 
+## MVP features
+
+- Multilingual public pages in Uzbek, Russian, and English
+- Five event categories: wedding, birthday, family, corporate, graduation
+- Interactive invitation builder with live preview
+- Three visual themes and event detail fields
+- Shareable public invitation URL
+- Invitation payload is encoded in the URL query string; there is no database persistence in this MVP
+- Payments, accounts, and server-side invitation management are not included yet
+
 ## SEO baseline
 
 - Localized title and description metadata
@@ -54,4 +64,4 @@ Read [SEO and AI Search Readiness](docs/SEO-AND-AI-SEARCH.md) for production req
 
 ## Production configuration
 
-Set `NEXT_PUBLIC_SITE_URL` to the final canonical HTTPS domain before deployment. The current fallback domain is a development placeholder and must be replaced.
+Set `NEXT_PUBLIC_SITE_URL` to the final canonical HTTPS domain before deployment. The development fallback is localhost. Set the final HTTPS origin in the hosting environment before launch.
