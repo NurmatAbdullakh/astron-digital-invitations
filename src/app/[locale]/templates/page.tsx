@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import { invitationTemplates } from "@/lib/invitations/templates";
 
 const data = {
-  uz: { title: "Taklifnoma shablonlari", description: "Tadbiringiz uchun sodda, zamonaviy raqamli taklifnoma dizaynini tanlang.", intro: "Sizga mos uslubni tanlang", body: "Har bir shablonni tanlashdan oldin ko‘rib chiqing. Keyin tadbir ma’lumotlarini qo‘shib, o‘zingizga moslang.", back: "Bosh sahifa", create: "Shu shablonni tanlash", category: "Tadbir turi", names: ["To‘y", "Tug‘ilgan kun", "Oilaviy bayram", "Korporativ", "Bitiruv"], selected: "Tanlash" },
-  ru: { title: "Шаблоны приглашений", description: "Выберите лаконичный современный дизайн цифрового приглашения.", intro: "Выберите свой стиль", body: "Посмотрите каждый шаблон перед выбором. Затем добавьте детали события и настройте приглашение.", back: "Главная", create: "Выбрать шаблон", category: "Тип события", names: ["Свадьба", "День рождения", "Семейный праздник", "Корпоратив", "Выпускной"], selected: "Выбрать" },
-  en: { title: "Invitation templates", description: "Choose a clean, modern digital invitation design for your event.", intro: "Choose a style that feels right", body: "Preview each template before choosing. Add your event details and make the invitation your own.", back: "Home", create: "Use this template", category: "Event type", names: ["Wedding", "Birthday", "Family celebration", "Corporate", "Graduation"], selected: "Choose" },
+  uz: { title: "Taklifnoma shablonlari", description: "Muhim kuningiz uchun nafis, esda qolarli va o‘ziga xos raqamli taklifnomani tanlang.", intro: "Har bir lahzaga munosib dizayn", body: "Nafis kompozitsiyalar, chiroyli tipografika va mayda detallargacha o‘ylangan uslublar. O‘zingizga yoqqanini tanlang — taklifnomangizni jonli ko‘rinishda darhol sozlang.", back: "Bosh sahifa", create: "Shu shablonni tanlash", category: "Tadbir turi", names: ["To‘y", "Tug‘ilgan kun", "Oilaviy bayram", "Korporativ", "Bitiruv"], selected: "Tanlash" },
+  ru: { title: "Шаблоны приглашений", description: "Выберите элегантное цифровое приглашение, которое задаст настроение вашему особому дню.", intro: "Дизайн для особенных мгновений", body: "Элегантные композиции, выразительная типографика и внимание к каждой детали. Выберите стиль и сразу настройте своё приглашение.", back: "Главная", create: "Выбрать шаблон", category: "Тип события", names: ["Свадьба", "День рождения", "Семейный праздник", "Корпоратив", "Выпускной"], selected: "Выбрать" },
+  en: { title: "Invitation templates", description: "Discover an elegant digital invitation that sets the mood for your special day.", intro: "Choose a style that feels right", body: "Preview each template before choosing. Add your event details and make the invitation your own.", back: "Home", create: "Use this template", category: "Event type", names: ["Wedding", "Birthday", "Family celebration", "Corporate", "Graduation"], selected: "Choose" },
 } as const;
 
 const categories = ["wedding", "birthday", "family", "corporate", "graduation"] as const;
@@ -29,9 +29,9 @@ export default async function TemplatesPage({ params }: { params: Promise<{ loca
     en: ["Botanical", "Editorial", "Minimal"],
   }[lang];
   const templateDescriptions = {
-    uz: ["Nafis, tabiiy va sokin", "Zamonaviy tipografika", "Sodda va ixcham"],
-    ru: ["Нежный природный стиль", "Современная типографика", "Просто и лаконично"],
-    en: ["Soft, natural and calm", "Modern typography", "Simple and compact"],
+    uz: ["Nozik gullar va romantik kayfiyat", "Hashamatli klassika va nafislik", "Zamonaviy uslub va dadil tipografika"],
+    ru: ["Нежные цветы и романтика", "Роскошь классики и элегантность", "Современный стиль и выразительная типографика"],
+    en: ["Delicate florals and romance", "Timeless luxury and elegance", "Modern style and expressive type"],
   }[lang];
   return (
     <main className="templates-page">
@@ -41,7 +41,7 @@ export default async function TemplatesPage({ params }: { params: Promise<{ loca
         <div className="locale-switch">{(["uz", "ru", "en"] as const).map((langCode) => <Link key={langCode} href={`/${langCode}/templates`}>{langCode.toUpperCase()}</Link>)}</div>
       </header>
       <section className="templates-hero">
-        <p className="eyebrow">ASTRON COLLECTION</p>
+        <p className="eyebrow">✦ &nbsp; ASTRON SIGNATURE COLLECTION</p>
         <h1>{item.intro}</h1>
         <p className="hero-description">{item.body}</p>
         <div className="template-gallery">
