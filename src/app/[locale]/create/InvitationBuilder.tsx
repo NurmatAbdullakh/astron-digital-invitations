@@ -344,6 +344,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
               template={form.template}
               theme={selectedTemplate.theme}
               invitationLabel={t.invitation}
+              dateCaption={t.dateLabel}
               hosts={form.hosts || form.title || eventName}
               title={form.title || eventName}
               date={dateLabel}
