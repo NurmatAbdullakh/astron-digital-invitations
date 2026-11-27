@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import "./globals.css";
+import "./category.css";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://your-domain.uz";
 
@@ -33,9 +34,18 @@ export const viewport: Viewport = {
   themeColor: "#f8f6f2",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
+export default async function RootLayout({
+  children,
+  params,
+}: Readonly<{
+  children: ReactNode;
+  params: Promise<{ locale?: string }>;
+}>) {
+  const { locale = "uz" } = await params;
+  const htmlLang = ["uz", "ru", "en"].includes(locale) ? locale : "uz";
+
   return (
-    <html lang="uz">
+    <html lang={htmlLang}>
       <body>{children}</body>
     </html>
   );
