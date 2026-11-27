@@ -263,7 +263,21 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
                     className={`wizard-template template-card-${template.id} ${form.template === template.id ? "is-selected" : ""}`}
                     aria-pressed={form.template === template.id} onClick={() => update("template", template.id)}>
                     <span className={`wizard-template-art template-mini template-mini-${template.id}`} aria-hidden="true">
-                      <i>{template.marker}</i><b>{form.hosts || "Aziza & Mirjalol"}</b><small>12 · 06 · 2027</small><em>{t.sample}</em>
+                      <InvitationArtwork
+                        template={template.id}
+                        theme={template.theme}
+                        invitationLabel={t.invitation}
+                        dateCaption={t.dateLabel}
+                        hosts={form.hosts || (locale === "ru" ? "Анна и Михаил" : locale === "uz" ? "Aziza va Mirjalol" : "Anna & Michael")}
+                        title={form.title || eventName}
+                        date={dateLabel}
+                        time={form.time}
+                        locationLabel={t.location}
+                        venue={form.venue || t.venuePlaceholder}
+                        address={form.address}
+                        message={form.message || t.note}
+                        compact
+                      />
                     </span>
                     <span className="wizard-template-meta"><strong>{t.templateNames[index]}</strong><small>{t.templateDescriptions[index]}</small></span>
                     <span className="wizard-template-check">{form.template === template.id ? "✓" : "+"}</span>
