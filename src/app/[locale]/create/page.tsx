@@ -22,5 +22,5 @@ export default async function CreateInvitationPage({
 }) {
   const [{ locale }, query] = await Promise.all([params, searchParams]);
   if (!locales.includes(locale as (typeof locales)[number])) notFound();
-  return <InvitationBuilder locale={locale as (typeof locales)[number]} initialType={query.type ?? "wedding"} initialTemplate={query.template} />;
+  return <InvitationBuilder locale={locale as (typeof locales)[number]} initialType={query.type ?? ""} initialTemplate={query.template} />;
 }
