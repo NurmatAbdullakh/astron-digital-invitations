@@ -2,7 +2,7 @@
 id: TASK-ASTRON-DESIGN-001
 title: Production-minded mobile-first invitation studio
 feature: invitation-studio
-status: IN_PROGRESS
+status: IN_REVIEW
 priority: HIGH
 assignee: FRONTEND_ENGINEER
 sprint: SPRINT-ASTRON-MVP-002
