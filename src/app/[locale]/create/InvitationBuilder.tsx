@@ -219,7 +219,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
         <nav className="wizard-tabs" role="tablist" aria-label={t.heading}>
           {steps.map((step, index) => (
             <button key={step} type="button" role="tab" aria-selected={activeStep === step}
-              aria-controls={`wizard-panel-${step}`} id={`wizard-tab-${step}`}
+              aria-controls="wizard-panel" id={`wizard-tab-${step}`}
               className={`wizard-tab ${activeStep === step ? "is-active" : ""} ${currentIndex > index ? "is-complete" : ""}`}
               onClick={() => setActiveStep(step)}>
               <span className="wizard-tab-number">{currentIndex > index ? "✓" : `0${index + 1}`}</span>
@@ -230,7 +230,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
       </div>
 
       <div className={`wizard-workspace wizard-step-${activeStep}`}>
-        <section className="wizard-main-panel" role="tabpanel" id={`wizard-panel-${activeStep}`} aria-labelledby={`wizard-tab-${activeStep}`}>
+        <section className="wizard-main-panel" role="tabpanel" id="wizard-panel" aria-labelledby={`wizard-tab-${activeStep}`}>
           {activeStep === "design" && (
             <div className="wizard-step-content design-step">
               <div className="wizard-section-title">
