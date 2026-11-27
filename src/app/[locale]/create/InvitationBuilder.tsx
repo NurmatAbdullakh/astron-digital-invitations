@@ -49,7 +49,7 @@ const labels = {
   ru: {
     back: "Назад", eyebrow: "ASTRON · DIGITAL INVITATIONS", heading: "Создайте своё приглашение",
     intro: "Всего несколько шагов. Выберите дизайн, добавьте детали и посмотрите результат.",
-    step1: "Дизайн", step2: "Детали", step3: "Просмотр",
+    step1: "Дизайн", step2: "Данные", step3: "Просмотр",
     stepHint: "Какой стиль подойдёт вашему празднику?", event: "Тип события",
     title: "Название приглашения", hosts: "Кого поздравляем?", date: "Дата", time: "Время",
     venue: "Место проведения", address: "Адрес", message: "Пожелание гостям",
@@ -67,7 +67,7 @@ const labels = {
     hostPlaceholder: "Азиза и Мирджалол", venuePlaceholder: "Versal Palace",
     addressPlaceholder: "Ташкент, улица Амира Темура",
     messagePlaceholder: "Разделите с нами этот день!",
-    templateNames: ["Ботаника", "The Classic", "Modern Muse"],
+    templateNames: ["Ботаника", "Классика", "Современный стиль"],
     templateDescriptions: ["Нежные цветы и романтика", "Роскошь классики", "Современно и выразительно"],
     localOnly: "Черновик хранится только в этом браузере.",
     optional: "Необязательно", eventTitle: "О вашем событии",
