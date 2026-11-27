@@ -67,6 +67,7 @@ export default async function PublicInvitationPage({
         template={isInvitationTemplateId(invitation.template) ? invitation.template : "botanical"}
         theme={invitation.theme}
         invitationLabel={t.invite}
+        dateCaption={t.date}
         hosts={invitation.hosts || invitation.title}
         title={invitation.title}
         date={formattedDate}
