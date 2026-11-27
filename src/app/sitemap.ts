@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return routes.flatMap((route) =>
     locales.map((locale) => ({
       url: `${siteUrl}/${locale}${route}`,
-      changeFrequency: route === "" ? "weekly" : "monthly",
+      changeFrequency: route === "" ? ("weekly" as const) : ("monthly" as const),
       priority: route === "" ? 1 : 0.7,
       alternates: {
         languages: Object.fromEntries(
