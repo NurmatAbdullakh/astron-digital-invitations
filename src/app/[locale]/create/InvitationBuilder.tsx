@@ -107,7 +107,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
             setForm({
               ...emptyInvitation(candidate.type),
               ...candidate,
-              template: isInvitationTemplateId(candidate.template) ? candidate.template : "botanical",
+              template: isInvitationTemplateId(initialTemplate) ? initialTemplate : isInvitationTemplateId(candidate.template) ? candidate.template : "botanical",
             });
             setNotice(t.restored);
           }
@@ -118,7 +118,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     } finally {
       setDraftLoaded(true);
     }
-  }, [locale, t.restored]);
+  }, [initialTemplate, locale, t.restored]);
 
   const dateLabel = useMemo(() => {
     if (!form.date) return t.dateLabel;
