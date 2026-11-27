@@ -68,7 +68,7 @@ export default function InvitationArtwork({
         </div>
       )}
       <p className="preview-message">{message}</p>
-      <div className="artwork-bottomline"><span>WITH JOY</span><span>♥</span><span>ASTRON</span></div>
+      <div className="artwork-bottomline"><span>WITH JOY</span><span>♥</span><span>{footerLabel}</span></div>
     </article>
   );
 }
