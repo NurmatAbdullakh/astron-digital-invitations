@@ -200,7 +200,6 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
   }
 
   const stepNames = [t.step1, t.step2, t.step3];
-  const stepIcons = ["✦", "02", "03"];
 
   return (
     <main className="builder-page studio-premium studio-wizard">
@@ -221,6 +220,14 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
             <button key={step} type="button" role="tab" aria-selected={activeStep === step}
               aria-controls="wizard-panel" id={`wizard-tab-${step}`}
               className={`wizard-tab ${activeStep === step ? "is-active" : ""} ${currentIndex > index ? "is-complete" : ""}`}
+              tabIndex={activeStep === step ? 0 : -1}
+              onKeyDown={(event) => {
+                if (event.key !== "ArrowRight" && event.key !== "ArrowLeft") return;
+                event.preventDefault();
+                const nextIndex = (index + (event.key === "ArrowRight" ? 1 : steps.length - 1)) % steps.length;
+                setActiveStep(steps[nextIndex]);
+                document.getElementById(`wizard-tab-${steps[nextIndex]}`)?.focus();
+              }}
               onClick={() => setActiveStep(step)}>
               <span className="wizard-tab-number">{currentIndex > index ? "✓" : `0${index + 1}`}</span>
               <span>{stepNames[index]}</span>
