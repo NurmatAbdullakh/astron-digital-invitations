@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 
 type InvitationArtworkProps = {
   template: "botanical" | "editorial" | "minimal";
-  theme: "sage" | "sand" | "rose";
+  theme: "sage" | "rose" | "sand";
   invitationLabel: string;
   hosts: string;
   title: string;
@@ -15,60 +15,116 @@ type InvitationArtworkProps = {
   address?: string;
   message: string;
   footerLabel?: string;
+  dateCaption?: string;
   compact?: boolean;
 };
 
-function BotanicalMark() {
+function BotanicalOrnament() {
   return (
-    <svg className="artwork-botanical-mark" viewBox="0 0 140 100" aria-hidden="true">
-      <path d="M14 91C43 72 55 47 64 9M35 71C18 65 13 52 16 40c14 2 24 11 23 26M49 52C39 36 42 22 53 12c10 11 12 24 2 37M68 29C83 13 99 13 111 22c-8 13-21 19-39 12M31 78C18 79 9 88 7 98M65 9c6 11 13 16 25 18" fill="none" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round"/>
-      <path d="M17 40c12 3 19 12 22 26M53 12c7 11 8 24 2 37M111 22c-8 13-21 19-39 12" fill="none" stroke="currentColor" strokeWidth=".65" opacity=".65"/>
-      <circle cx="64" cy="9" r="2" fill="currentColor"/>
+    <svg className="artwork-botanical-ornament" viewBox="0 0 260 180" fill="none" aria-hidden="true">
+      <path d="M5 175C52 145 82 100 111 10M27 155C5 130 8 105 28 86C52 105 58 131 39 148M58 116C36 92 42 65 68 48C87 75 85 99 65 117M91 65C85 35 103 15 132 9C144 38 129 59 99 70M108 26C134 38 154 31 171 7C191 28 181 53 151 63M149 61C176 68 199 55 210 29C236 47 233 75 205 91M178 82C203 99 229 95 250 73C264 101 249 126 218 132" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round"/>
+      <path d="M28 86C45 105 49 126 39 148M68 48C82 72 81 95 65 117M132 9C144 38 129 59 99 70M171 7C191 28 181 53 151 63M210 29C236 47 233 75 205 91M250 73C264 101 249 126 218 132" stroke="currentColor" strokeWidth=".7" opacity=".55"/>
+      <circle cx="111" cy="10" r="2.5" fill="currentColor"/><circle cx="250" cy="73" r="2" fill="currentColor"/>
     </svg>
   );
 }
 
-function EditorialMark() {
-  return <div className="artwork-editorial-monogram" aria-hidden="true"><span>A</span><i>✦</i></div>;
+function EditorialOrnament() {
+  return (
+    <div className="artwork-editorial-seal" aria-hidden="true">
+      <span className="artwork-seal-ring" />
+      <span className="artwork-seal-letter">A<span>&</span>M</span>
+      <i>✳</i>
+    </div>
+  );
 }
 
-function MinimalMark() {
-  return <div className="artwork-minimal-mark" aria-hidden="true"><span>✳</span><i>✧</i><span>✳</span></div>;
+function MinimalOrnament() {
+  return (
+    <div className="artwork-minimal-arch" aria-hidden="true">
+      <span className="artwork-arch-inner" />
+      <i>✳</i>
+    </div>
+  );
 }
 
-export default function InvitationArtwork({
-  template, theme, invitationLabel, hosts, title, date, time, locationLabel,
-  venue, address, message, footerLabel = "ASTRON · DIGITAL INVITATIONS", compact = false,
-}: InvitationArtworkProps) {
-  const mark: Record<InvitationArtworkProps["template"], ReactNode> = {
-    botanical: <BotanicalMark />,
-    editorial: <EditorialMark />,
-    minimal: <MinimalMark />,
+function BotanicalLayout({ hosts, title, date, time, locationLabel, venue, address, message, invitationLabel, dateCaption, footerLabel }: Omit<InvitationArtworkProps, "template" | "theme" | "compact">) {
+  return (
+    <>
+      <div className="artwork-botanical-top"><span>✦</span><span>AN INVITATION TO CELEBRATE</span><span>✦</span></div>
+      <div className="artwork-botanical-flora"><BotanicalOrnament /></div>
+      <span className="preview-kicker">{invitationLabel}</span>
+      <h1>{hosts || title}</h1>
+      <div className="artwork-botanical-separator"><span />❧<span /></div>
+      <p className="preview-title">{title}</p>
+      <div className="artwork-botanical-date">
+        <span>{dateCaption}</span><strong>{date}</strong>{time && <small>{time}</small>}
+      </div>
+      {(venue || address) && <div className="preview-location"><b>{locationLabel}</b>{venue && <span>{venue}</span>}{address && <small>{address}</small>}</div>}
+      <p className="preview-message">{message}</p>
+      <div className="artwork-bottomline"><span>WITH LOVE</span><span>✦</span><span>{footerLabel}</span></div>
+    </>
+  );
+}
+
+function EditorialLayout({ hosts, title, date, time, locationLabel, venue, address, message, invitationLabel, dateCaption, footerLabel }: Omit<InvitationArtworkProps, "template" | "theme" | "compact">) {
+  return (
+    <>
+      <div className="artwork-editorial-top"><span>THE CELEBRATION</span><span>EST. IN LOVE · 2027</span></div>
+      <div className="artwork-editorial-hero">
+        <div className="artwork-editorial-copy">
+          <span className="preview-kicker">{invitationLabel}</span>
+          <h1>{hosts || title}</h1>
+          <p className="preview-title">{title}</p>
+        </div>
+        <EditorialOrnament />
+      </div>
+      <div className="artwork-editorial-date">
+        <span>{dateCaption}</span><strong>{date}</strong>{time && <small>{time}</small>}
+      </div>
+      {(venue || address) && <div className="preview-location"><b>{locationLabel}</b>{venue && <span>{venue}</span>}{address && <small>{address}</small>}</div>}
+      <p className="preview-message">{message}</p>
+      <div className="artwork-editorial-footer"><span>YOU ARE CORDIALLY INVITED</span><b>{footerLabel}</b></div>
+    </>
+  );
+}
+
+function MinimalLayout({ hosts, title, date, time, locationLabel, venue, address, message, invitationLabel, dateCaption, footerLabel }: Omit<InvitationArtworkProps, "template" | "theme" | "compact">) {
+  return (
+    <>
+      <div className="artwork-minimal-top"><span>№ 01</span><span>THE DAY WE CELEBRATE</span></div>
+      <MinimalOrnament />
+      <span className="preview-kicker">{invitationLabel}</span>
+      <h1>{hosts || title}</h1>
+      <p className="preview-title">{title}</p>
+      <div className="artwork-minimal-date">
+        <span>{dateCaption}</span><strong>{date}</strong>{time && <small>{time}</small>}
+      </div>
+      {(venue || address) && <div className="preview-location"><b>{locationLabel}</b>{venue && <span>{venue}</span>}{address && <small>{address}</small>}</div>}
+      <p className="preview-message">{message}</p>
+      <div className="artwork-minimal-footer"><span>MADE FOR YOUR MOMENT</span><span>{footerLabel}</span></div>
+    </>
+  );
+}
+
+export default function InvitationArtwork(props: InvitationArtworkProps) {
+  const {
+    template, theme, invitationLabel, hosts, title, date, time, locationLabel,
+    venue, address, message, footerLabel = "ASTRON · DIGITAL INVITATIONS",
+    dateCaption = "SAVE THE DATE", compact = false,
+  } = props;
+
+  const shared = { hosts, title, date, time, locationLabel, venue, address, message, invitationLabel, dateCaption, footerLabel };
+  const layouts: Record<InvitationArtworkProps["template"], ReactNode> = {
+    botanical: <BotanicalLayout {...shared} />,
+    editorial: <EditorialLayout {...shared} />,
+    minimal: <MinimalLayout {...shared} />,
   };
 
   return (
     <article className={`invitation-preview public-invitation invitation-artwork invitation-artwork--${template} preview-${theme} invitation-${template} ${compact ? "invitation-artwork--compact" : ""}`} data-template={template}>
       <div className="artwork-frame" aria-hidden="true" />
-      <div className="artwork-topline"><span>№ 001</span><span>EST. WITH LOVE</span></div>
-      <div className="artwork-mark">{mark[template]}</div>
-      <span className="preview-kicker">{invitationLabel}</span>
-      <h1>{hosts || title}</h1>
-      <span className="artwork-divider" aria-hidden="true"><i />✦<i /></span>
-      <p className="preview-title">{title}</p>
-      <div className="artwork-date-block">
-        <span className="artwork-date-caption">{template === "editorial" ? "SAVE THE DATE" : "THE CELEBRATION"}</span>
-        <strong>{date}</strong>
-        {time && <span className="artwork-time">{time}</span>}
-      </div>
-      {(venue || address) && (
-        <div className="preview-location">
-          <b>{locationLabel}</b>
-          {venue && <span>{venue}</span>}
-          {address && <small>{address}</small>}
-        </div>
-      )}
-      <p className="preview-message">{message}</p>
-      <div className="artwork-bottomline"><span>WITH JOY</span><span>♥</span><span>{footerLabel}</span></div>
+      {layouts[template]}
     </article>
   );
 }
