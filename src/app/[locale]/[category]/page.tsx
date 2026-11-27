@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://your-domain.uz";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 const content = {
   wedding: {
     uz: ["To‘y taklifnomalari", "Eng muhim kuningizni yaqinlaringiz bilan chiroyli raqamli taklifnoma orqali baham ko‘ring.", "Nikoh oqshomingiz uchun nafis dizaynlar, tadbir sanasi, manzil va mehmonlar uchun barcha kerakli ma’lumotlar."],
@@ -58,7 +58,7 @@ export default async function EventCategoryPage({ params }: { params: Promise<{ 
   if (!locales.includes(locale as (typeof locales)[number]) || !categories.includes(category as keyof typeof content)) notFound();
   const item = content[category as keyof typeof content][locale as keyof typeof content.wedding];
   const home = locale === "ru" ? "Главная" : locale === "en" ? "Home" : "Bosh sahifa";
-  const catalog = locale === "ru" ? "Смотреть шаблоны" : locale === "en" ? "Explore templates" : "Shablonlarni ko‘rish";
+  const catalog = locale === "ru" ? "Создать приглашение" : locale === "en" ? "Create invitation" : "Taklifnoma yaratish";
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -70,7 +70,7 @@ export default async function EventCategoryPage({ params }: { params: Promise<{ 
   return (
     <main className="category-page">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }} />
-      <header className="site-header"><Link className="brand" href={`/${locale}`}><span className="brand-mark">a.</span><span>astron</span></Link><nav className="main-nav"><Link href={`/${locale}`}>{home}</Link><Link href={`/${locale}/templates`}>{catalog}</Link></nav><div className="locale-switch">{locales.map((lang) => <Link key={lang} href={`/${lang}/${category}`}>{lang.toUpperCase()}</Link>)}</div></header>
+      <header className="site-header"><Link className="brand" href={`/${locale}`}><span className="brand-mark">a.</span><span>astron</span></Link><nav className="main-nav"><Link href={`/${locale}`}>{home}</Link><Link href={`/${locale}/create?type=${category}`}>{catalog}</Link></nav><div className="locale-switch">{locales.map((lang) => <Link key={lang} href={`/${lang}/${category}`}>{lang.toUpperCase()}</Link>)}</div></header>
       <section className="category-hero"><p className="eyebrow">ASTRON DIGITAL INVITATIONS</p><h1>{item[0]}</h1><p className="hero-description">{item[1]}</p><div className="category-panel"><span className="category-flower">✳</span><p>{item[2]}</p><Link className="button button-primary" href={`/${locale}/templates`}>{catalog}<span aria-hidden="true">↗</span></Link></div></section>
       <footer className="site-footer"><Link className="brand" href={`/${locale}`}><span className="brand-mark">a.</span><span>astron</span></Link><p>{item[1]}</p><span>© {new Date().getFullYear()} Astron</span></footer>
     </main>
