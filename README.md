@@ -43,10 +43,13 @@ Useful scripts:
 
 - Multilingual public pages in Uzbek, Russian, and English
 - Five event categories: wedding, birthday, family, corporate, graduation
-- Interactive invitation builder with live preview
-- Three visual themes and event detail fields
+- Mobile-first invitation studio with live preview and compact template selector
+- Three distinct invitation templates: Botanical, Editorial, and Minimal
+- Event detail fields with localized Uzbek, Russian, and English labels
+- Explicit local draft save/restore in the same browser/device
 - Shareable public invitation URL
-- Invitation payload is encoded in the URL query string; there is no database persistence in this MVP\n- Local drafts are stored in browser localStorage and are not synced across devices or accounts
+- Invitation payload is encoded in the URL query string; there is no database persistence in this MVP
+- Local drafts are stored in browser localStorage and are not synced across devices or accounts\n- Local drafts are stored in browser localStorage and are not synced across devices or accounts
 - Payments, accounts, and server-side invitation management are not included yet
 
 ## SEO baseline
