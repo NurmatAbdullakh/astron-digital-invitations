@@ -60,7 +60,8 @@ The GitHub Actions workflow currently runs these checks for pull requests target
 - Repository scripts confirmed: `typecheck`, `lint`, `build`.
 - GitHub Actions run `46105035506` (head `9d1946f6d92cd0bdf4c30dade2757b54e4acb58d`) executed dependency installation successfully, then TypeScript failed at `src/app/[locale]/templates/page.tsx:115` because the selected category could be `undefined`.
 - Fixed the category narrowing in commit `61c8f9f9530f0b7ae80e09f768576ac75996fdfa` using a typed `find(...) ?? "all"` fallback.
-- Latest head at the time of this update is `1130117575bc943b07e0248603d504ecd371793d`; no follow-up workflow run has yet been returned for that commit.
+- Follow-up GitHub Actions run `46105227121` completed successfully for PR #5 (merge commit `17cceb360093fe70dcaf96a0220e21043d635a53`, built from head `346eb4773ae1f9e659992933cf853f4ff95987e6` against `main`). Dependency installation, TypeScript typecheck, ESLint, and production build all passed.
+- The typecheck fix is included in the tested head. No source changes were made after this successful run; remaining commits after it are documentation-only.
 - Real-browser QA, viewport screenshots, and screen-reader testing have not been executed.
 - Do not mark the task DONE until CI and browser QA evidence are recorded.
 
