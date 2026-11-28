@@ -50,7 +50,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
-  if (!(locale in copy)) return {};
+  if (!locales.includes(locale as Locale)) return {};
   const t = copy[locale as Locale];
   return {
     title: t.title,
@@ -68,7 +68,7 @@ export default async function TemplatesPage({
   searchParams: Promise<{ category?: string }>;
 }) {
   const [{ locale }, query] = await Promise.all([params, searchParams]);
-  if (!(locale in copy)) notFound();
+  if (!locales.includes(locale as Locale)) notFound();
   const lang = locale as Locale;
   const t = copy[lang];
   const category = eventTypes.includes(query.category as (typeof eventTypes)[number]) ? query.category : "all";
