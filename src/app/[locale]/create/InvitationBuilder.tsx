@@ -70,7 +70,7 @@ function eventIndex(type: string) {
 }
 function validDate(value: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const parsed = new Date(`${value}T12:00:00`);
+  const parsed = new Date(`${value}T00:00:00Z`);
   return !Number.isNaN(parsed.getTime()) && parsed.toISOString().slice(0, 10) === value;
 }
 
@@ -155,7 +155,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
     }
     try {
       const url = new URL(`/${locale}/invite`, window.location.origin);
-      url.searchParams.set("data", JSON.stringify({ ...form, theme: selectedTemplate.theme }));
+      url.searchParams.set("data", JSON.stringify({ ...form, title: form.title.trim() || eventName, hosts: form.hosts.trim(), theme: selectedTemplate.theme }));
       if (url.toString().length > 5000) { setNotice(t.shareError); return; }
       setShareUrl(url.toString()); setNotice(t.shareReady);
     } catch { setNotice(t.shareError); }
