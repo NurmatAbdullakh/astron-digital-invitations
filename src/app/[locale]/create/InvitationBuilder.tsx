@@ -79,7 +79,7 @@ export default function InvitationBuilder({ locale, initialType, initialTemplate
   const type = eventTypes.includes(initialType as (typeof eventTypes)[number]) ? initialType : "wedding";
   const templateId: InvitationTemplateId = isInvitationTemplateId(initialTemplate) ? initialTemplate : "botanical";
   const selectedTemplate = getInvitationTemplate(templateId);
-  const [form, setForm] = useState<Invitation>({ type, template: templateId, title: t.titleDefault[eventIndex(type)], hosts: "", date: "", time: "18:00", venue: "", address: "", message: "" });
+  const [form, setForm] = useState<Invitation>({ type, template: templateId, title: t.titleDefault[eventIndex(type)], hosts: "", date: "", time: "", venue: "", address: "", message: "" });
   const [stepIndex, setStepIndex] = useState(0);
   const [notice, setNotice] = useState("");
   const [shareUrl, setShareUrl] = useState("");
