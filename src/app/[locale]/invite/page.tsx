@@ -18,7 +18,7 @@ const translations = {
 
 function isValidDate(value: string) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return false;
-  const date = new Date(`${value}T12:00:00`);
+  const date = new Date(`${value}T00:00:00Z`);
   return !Number.isNaN(date.getTime()) && date.toISOString().slice(0, 10) === value;
 }
 function isInvitation(value: unknown): value is Invitation {
@@ -30,7 +30,7 @@ function isInvitation(value: unknown): value is Invitation {
   if (!["sage", "rose", "sand"].includes(String(item.theme))) return false;
   if (item.template !== undefined && !isInvitationTemplateId(item.template)) return false;
   if (typeof item.template === "string" && getInvitationTemplate(item.template as InvitationTemplateId).theme !== item.theme) return false;
-  return String(item.title).length <= 90 && String(item.hosts).length <= 70
+  return String(item.title).length <= 90 && String(item.hosts).trim().length > 0 && String(item.hosts).length <= 70
     && isValidDate(String(item.date)) && (String(item.time) === "" || /^([01]\d|2[0-3]):[0-5]\d$/.test(String(item.time)))
     && String(item.venue).length <= 80 && String(item.address).length <= 140 && String(item.message).length <= 220;
 }
