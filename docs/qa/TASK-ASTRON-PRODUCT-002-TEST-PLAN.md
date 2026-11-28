@@ -13,7 +13,7 @@ Verify the catalogue-first journey from localized entry through template selecti
 |---|---|---|---|
 | CAT-01 | Open `/ru`, `/uz`, `/en` | Redirects to matching localized catalogue | P1 |
 | CAT-02 | Open catalogue without category | All three original templates are visible | P1 |
-| CAT-03 | Choose each event category | Category context is preserved in preview URL | P1 |
+| CAT-03 | Choose each event category | Selected category remains active and is preserved in preview URL | P1 |
 | CAT-04 | Open each template preview | Correct artwork, localized copy, and category sample render | P1 |
 | CAT-05 | Use template | Builder opens with selected template and event type | P1 |
 | WIZ-01 | Continue from empty names step | Progress is blocked and accessible error appears | P1 |
