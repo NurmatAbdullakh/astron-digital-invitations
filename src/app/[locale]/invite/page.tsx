@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import InvitationArtwork from "@/components/invitations/InvitationArtwork";
 import { notFound } from "next/navigation";
-import { getInvitationTemplate, isInvitationTemplateId } from "@/lib/invitations/templates";
+import { getInvitationTemplate, isInvitationTemplateId, type InvitationTemplateId } from "@/lib/invitations/templates";
 
 export const metadata: Metadata = { title: "Digital invitation", robots: { index: false, follow: false } };
 type Invitation = {
@@ -29,7 +29,7 @@ function isInvitation(value: unknown): value is Invitation {
   if (!eventTypes.includes(item.type as (typeof eventTypes)[number])) return false;
   if (!["sage", "rose", "sand"].includes(String(item.theme))) return false;
   if (item.template !== undefined && !isInvitationTemplateId(item.template)) return false;
-  if (typeof item.template === "string" && getInvitationTemplate(item.template as Invitation["template"] & string).theme !== item.theme) return false;
+  if (typeof item.template === "string" && getInvitationTemplate(item.template as InvitationTemplateId).theme !== item.theme) return false;
   return String(item.title).length <= 90 && String(item.hosts).length <= 70
     && isValidDate(String(item.date)) && (String(item.time) === "" || /^([01]\d|2[0-3]):[0-5]\d$/.test(String(item.time)))
     && String(item.venue).length <= 80 && String(item.address).length <= 140 && String(item.message).length <= 220;
