@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!locales.includes(locale as (typeof locales)[number]) || !isInvitationTemplateId(template)) return {};
   const t = labels[locale as keyof typeof labels];
   const index = ["botanical", "editorial", "minimal"].indexOf(template);
-  return { title: `${t.names[index]} — ${t.title}`, description: t.descriptions[index], robots: { index: true, follow: true } };
+  return { title: `${t.names[index]} — ${t.title}`, description: t.descriptions[index], alternates: { canonical: `/${locale}/templates/${template}`, languages: { uz: `/uz/templates/${template}`, ru: `/ru/templates/${template}`, en: `/en/templates/${template}` } }, openGraph: { title: `${t.names[index]} — ${t.title}`, description: t.descriptions[index], type: "website" }, robots: { index: true, follow: true } };
 }
 
 export function generateStaticParams() {
