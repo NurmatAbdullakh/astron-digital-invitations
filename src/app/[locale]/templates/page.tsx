@@ -95,12 +95,15 @@ export default async function TemplatesPage({
 
       <section className="catalog-content" aria-label={t.title}>
         <div className="catalog-toolbar">
-          <div className="catalog-filters" aria-label={t.all}>
-            <Link className={category === "all" ? "catalog-filter is-active" : "catalog-filter"} href={`/${locale}/templates`}>{t.all}</Link>
-            {eventTypes.map((type, index) => (
-              <Link key={type} className={category === type ? "catalog-filter is-active" : "catalog-filter"}
-                href={`/${locale}/templates?category=${type}`}>{t.categories[index]}</Link>
-            ))}
+          <div className="catalog-filter-group">
+            <span className="catalog-filter-label">{t.eventTypeLabel}</span>
+            <div className="catalog-filters" aria-label={t.eventTypeLabel}>
+              <Link className={category === "all" ? "catalog-filter is-active" : "catalog-filter"} href={`/${locale}/templates`} aria-current={category === "all" ? "page" : undefined}>{t.all}</Link>
+              {eventTypes.map((type, index) => (
+                <Link key={type} className={category === type ? "catalog-filter is-active" : "catalog-filter"}
+                  href={`/${locale}/templates?category=${type}`} aria-current={category === type ? "page" : undefined}>{t.categories[index]}</Link>
+              ))}
+            </div>
           </div>
           <span className="catalog-count">{invitationTemplates.length} {t.count}</span>
         </div>
