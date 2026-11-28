@@ -60,8 +60,8 @@ The GitHub Actions workflow currently runs these checks for pull requests target
 - Repository scripts confirmed: `typecheck`, `lint`, `build`.
 - GitHub Actions run `46105035506` (head `9d1946f6d92cd0bdf4c30dade2757b54e4acb58d`) executed dependency installation successfully, then TypeScript failed at `src/app/[locale]/templates/page.tsx:115` because the selected category could be `undefined`.
 - Fixed the category narrowing in commit `61c8f9f9530f0b7ae80e09f768576ac75996fdfa` using a typed `find(...) ?? "all"` fallback.
-- Follow-up GitHub Actions run `46105227121` completed successfully for PR #5 (merge commit `17cceb360093fe70dcaf96a0220e21043d635a53`, built from head `346eb4773ae1f9e659992933cf853f4ff95987e6` against `main`). Dependency installation, TypeScript typecheck, ESLint, and production build all passed.
-- The typecheck fix is included in the tested head. No source changes were made after this successful run; remaining commits after it are documentation-only.
+- GitHub Actions run `46105360010` completed successfully for PR #5 (merge commit `6693f17558ec62d8c2d5a94d406bd895574c8fb7`, built from head `493d0ffe7a4d2ea16229b1f8a9f31e1d9c4a62f8` against `main`). Dependency installation, TypeScript typecheck, ESLint, and production build all passed.
+- This run includes the latest catalogue event-type selector and responsive CSS changes. No source changes were made after this successful run; remaining commits after it are documentation-only.
 - Real-browser QA, viewport screenshots, and screen-reader testing have not been executed.
 - Do not mark the task DONE until CI and browser QA evidence are recorded.
 
