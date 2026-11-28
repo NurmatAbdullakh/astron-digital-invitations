@@ -39,7 +39,7 @@ export default async function PublicInvitationPage({
   params, searchParams
 }: { params: Promise<{ locale: string }>; searchParams: Promise<{ data?: string }> }) {
   const [{ locale }, query] = await Promise.all([params, searchParams]);
-  if (!(locale in translations) || !query.data || query.data.length > 5000) notFound();
+  if (!["uz", "ru", "en"].includes(locale) || !query.data || query.data.length > 5000) notFound();
   let parsed: unknown;
   try { parsed = JSON.parse(query.data); } catch { notFound(); }
   if (!isInvitation(parsed)) notFound();
