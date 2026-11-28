@@ -44,7 +44,11 @@ const eventTypes = ["wedding", "birthday", "family", "corporate", "graduation"] 
 const locales = ["uz", "ru", "en"] as const;
 type Locale = keyof typeof copy;
 
-export function generateStaticParams() {\n  return locales.map((locale) => ({ locale }));\n}\n\nexport async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
+
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   if (!(locale in copy)) return {};
   const t = copy[locale as Locale];
