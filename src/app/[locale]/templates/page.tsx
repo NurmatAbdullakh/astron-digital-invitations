@@ -71,7 +71,7 @@ export default async function TemplatesPage({
   if (!locales.includes(locale as Locale)) notFound();
   const lang = locale as Locale;
   const t = copy[lang];
-  const category = eventTypes.includes(query.category as (typeof eventTypes)[number]) ? query.category : "all";
+  const category = eventTypes.find((type) => type === query.category) ?? "all";
   const categoryName = (type: string) => t[type as keyof typeof t] as string;
   const dateSample = lang === "ru" ? "12 июня 2027" : lang === "uz" ? "12 · 06 · 2027" : "June 12, 2027";
   const hostSample = lang === "ru" ? "Анна и Михаил" : lang === "uz" ? "Aziza va Mirjalol" : "Anna & Michael";
@@ -112,7 +112,7 @@ export default async function TemplatesPage({
                 <div className={`catalog-art-frame template-mini template-mini-${template.id}`}>
                   <InvitationArtwork template={template.id} theme={template.theme}
                     invitationLabel={t.invite} dateCaption={t.date} hosts={hostSample}
-                    title={category === "all" ? t.wedding : categoryName(category)}
+                    title={categoryName(category === "all" ? "wedding" : category)}
                     date={dateSample} time="18:00" locationLabel={t.location}
                     venue={lang === "ru" ? "Villa Garden" : "Villa Garden"} address="Tashkent"
                     message={t.note} compact />
