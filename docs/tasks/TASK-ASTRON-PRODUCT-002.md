@@ -47,4 +47,8 @@ Implement the approved catalogue-first product journey defined in `docs/product/
 
 ## Handoff
 - Current owner: Frontend Engineer / Team Lead
-- Next: implement catalogue and template preview, then wizard; QA and Security review follow.
+- Implemented: catalogue-first localized entry, template preview route, seven-step guided builder, shared live artwork preview, defensive local draft restore, URL size guard, public payload validation, and localized sitemap entries.
+- Documentation: `docs/product/PRD.md`, `docs/architecture/ADR-001-catalogue-guided-journey.md`, `docs/qa/TASK-ASTRON-PRODUCT-002-TEST-PLAN.md`, and `docs/security/TASK-ASTRON-PRODUCT-002-SECURITY-REVIEW.md`.
+- Validation: Static diff review completed. Typecheck/lint/build and browser QA remain pending; no successful CI run has been observed yet. Shell cloning was unavailable because GitHub DNS could not be resolved in this environment.
+- Risks: Share payload is visible in URL and is not durable hosting; drafts are browser-local only. See security review.
+- Next: QA Engineer to run automated and responsive acceptance checks; Security Reviewer to validate negative payload cases; Team Lead to review integration. Product Owner acceptance and merge remain pending.
