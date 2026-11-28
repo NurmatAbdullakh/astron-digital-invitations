@@ -58,7 +58,9 @@ The GitHub Actions workflow currently runs these checks for pull requests target
 
 - Static diff compared against PRD and task acceptance criteria.
 - Repository scripts confirmed: `typecheck`, `lint`, `build`.
-- No automated workflow run was returned for the current head when first queried.
+- GitHub Actions run `46105035506` (head `9d1946f6d92cd0bdf4c30dade2757b54e4acb58d`) executed dependency installation successfully, then TypeScript failed at `src/app/[locale]/templates/page.tsx:115` because the selected category could be `undefined`.
+- Fixed the category narrowing in commit `61c8f9f9530f0b7ae80e09f768576ac75996fdfa` using a typed `find(...) ?? "all"` fallback.
+- Latest head at the time of this update is `1130117575bc943b07e0248603d504ecd371793d`; no follow-up workflow run has yet been returned for that commit.
 - Real-browser QA, viewport screenshots, and screen-reader testing have not been executed.
 - Do not mark the task DONE until CI and browser QA evidence are recorded.
 
