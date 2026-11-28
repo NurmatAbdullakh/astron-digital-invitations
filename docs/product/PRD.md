@@ -154,7 +154,7 @@ Supported locales: `uz`, `ru`, `en`.
 
 ### Catalogue
 - FR-CAT-01: Show available templates as visual product cards.
-- FR-CAT-02: Provide event-type filters (wedding, birthday, family, corporate, graduation).
+- FR-CAT-02: Provide an event-type context selector (wedding, birthday, family, corporate, graduation). All current templates are cross-event designs, so selecting a category preserves event context without hiding otherwise compatible templates.
 - FR-CAT-03: Cards show preview artwork, localized name, short description, and a clear preview action.
 - FR-CAT-04: Selecting preview opens a dedicated template route without requiring account creation or event data.
 - FR-CAT-05: Template selection preserves locale, event type, and template ID.
@@ -289,7 +289,7 @@ The existing public invitation contract may retain compatible field names (`type
 ## 15. Acceptance criteria / Definition of Done
 
 - [ ] Main locale entry opens the template catalogue.
-- [ ] Event filters update the visible template list.
+- [ ] Event-type selection is preserved through the template preview and builder; all cross-event templates remain available.
 - [ ] Every template card can open its own preview route.
 - [ ] Preview route displays the selected actual artwork and a working selection CTA.
 - [ ] Selecting a template opens the wizard with the chosen template and event type.
