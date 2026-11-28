@@ -4,7 +4,7 @@ SEO-first digital invitation platform built with Next.js App Router and TypeScri
 
 ## Product direction
 
-A multilingual digital invitation platform for weddings, birthdays, family events, corporate events, graduations, and other occasions.
+A multilingual digital invitation platform for weddings, birthdays, family events, corporate events, graduations, and other occasions. The primary experience is a template marketplace followed by a guided invitation builder.
 
 ## Stack
 
@@ -31,26 +31,30 @@ Useful scripts:
 
 ## Routes
 
-- `/uz`, `/ru`, `/en` — localized homepages
-- `/[locale]/wedding`
-- `/[locale]/birthday`
-- `/[locale]/family`
-- `/[locale]/corporate`
-- `/[locale]/graduation`
-- `/[locale]/templates`
+- `/` — redirects to the default Uzbek catalogue
+- `/[locale]` — redirects to the localized catalogue
+- `/[locale]/templates` — primary template catalogue
+- `/[locale]/templates/[template]` — dedicated template preview and selection
+- `/[locale]/create?type=[event]&template=[id]` — guided invitation wizard
+- `/[locale]/invite?data=[payload]` — shareable public invitation preview
+- `/[locale]/wedding`, `/birthday`, `/family`, `/corporate`, `/graduation` — event landing pages
+
+Supported locales: Uzbek (`uz`), Russian (`ru`), English (`en`).
 
 ## MVP features
 
-- Multilingual public pages in Uzbek, Russian, and English
-- Five event categories: wedding, birthday, family, corporate, graduation
-- Premium-feeling, guided mobile-first invitation studio with live preview and curated design selection
-- Three distinct invitation styles: Botanical, The Classic, and Modern Muse
-- Event detail fields with localized Uzbek, Russian, and English labels
+- Catalogue-first discovery with event context and original invitation artwork cards
+- Dedicated template preview before selection; no account required
+- Seven-step guided wizard that asks one question or one related group at a time
+- Live preview powered by the same `InvitationArtwork` component as the public invitation
+- Three original invitation styles: Botanical, Editorial, and Minimal
+- Localized Uzbek, Russian, and English catalogue, preview, and builder UI
 - Explicit local draft save/restore in the same browser/device
-- Shareable public invitation URL
-- Invitation payload is encoded in the URL query string; there is no database persistence in this MVP
+- Shareable invitation URL with payload size guard and clipboard fallback
+- Public invitation payload validation and safe malformed-data handling
+- No database persistence in this MVP; share payload is encoded in the URL query string
 - Local drafts are stored in browser localStorage and are not synced across devices or accounts
-- Payments, accounts, and server-side invitation management are not included yet
+- Payments, accounts, permanent slug publishing, RSVP storage/notifications, and server-side invitation management are not included yet
 
 ## SEO baseline
 
@@ -59,7 +63,7 @@ Useful scripts:
 - Open Graph metadata
 - XML sitemap at `/sitemap.xml`
 - Robots directives at `/robots.txt`
-- JSON-LD structured data
+- JSON-LD structured data on public landing pages
 - OAI-SearchBot allowed for ChatGPT Search discovery
 - GPTBot configured separately from search crawling
 
