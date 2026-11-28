@@ -4,7 +4,7 @@ import InvitationArtwork from "@/components/invitations/InvitationArtwork";
 import { notFound } from "next/navigation";
 import { getInvitationTemplate, isInvitationTemplateId, type InvitationTemplateId } from "@/lib/invitations/templates";
 
-export const metadata: Metadata = { title: "Digital invitation", robots: { index: false, follow: false } };
+export const metadata: Metadata = { title: "Digital invitation", robots: { index: false, follow: false }, referrer: "no-referrer" };
 type Invitation = {
   type: string; title: string; hosts: string; date: string; time: string; venue: string;
   address: string; message: string; theme: "sage" | "rose" | "sand"; template?: string;
