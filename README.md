@@ -12,6 +12,7 @@ A multilingual digital invitation platform for weddings, birthdays, family event
 - React 19 and TypeScript
 - Server Components and statically generated public pages
 - CSS with responsive layouts
+- PostgreSQL (`pg`) and versioned migrations (`node-pg-migrate`) for server-side persistence foundation
 
 ## Local development
 
@@ -72,3 +73,18 @@ Read [SEO and AI Search Readiness](docs/SEO-AND-AI-SEARCH.md) for production req
 ## Production configuration
 
 Set `NEXT_PUBLIC_SITE_URL` to the final canonical HTTPS domain before deployment. The development fallback is localhost. Set the final HTTPS origin in the hosting environment before launch.
+
+## Database foundation
+
+The repository includes a PostgreSQL schema foundation, server-only connection pool, migration tooling, and separate liveness/readiness endpoints.
+
+- `GET /api/health` — application liveness; does not depend on PostgreSQL.
+- `GET /api/ready` — readiness; returns HTTP 503 when PostgreSQL is unavailable.
+- `npm run test:unit` — database configuration unit tests.
+- `npm run db:migrate` — apply reviewed migrations (requires a configured `DATABASE_URL`).
+
+For local development, create a dedicated PostgreSQL database and role, copy `.env.example` to `.env.local`, and set `DATABASE_URL`. The migration command is an explicit release step; it is not run automatically at app startup.
+
+Production hosting decision and network/security requirements are documented in [ADR-002](docs/architecture/ADR-002-contabo-postgresql-foundation.md) and the [Contabo PostgreSQL runbook](docs/operations/CONTABO-POSTGRESQL-RUNBOOK.md). Never expose PostgreSQL port 5432 publicly or commit real credentials.
+
+The initial migration creates the invitation, order, payment, payment-event, guest-access-token-hash, and audit-event tables. Customer-facing persistence APIs and payment processing are not implemented by this foundation.

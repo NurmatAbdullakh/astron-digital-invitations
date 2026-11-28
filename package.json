@@ -7,12 +7,16 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "db:migrate": "node-pg-migrate up --migrations-dir migrations",
+    "test:unit": "tsx --test src/server/db/config.test.ts"
   },
   "dependencies": {
     "next": "^16.0.0",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0"
+    "react-dom": "^19.2.0",
+    "pg": "^8.16.3",
+    "node-pg-migrate": "^7.9.1"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -20,6 +24,8 @@
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.0.0",
     "eslint-config-next": "^16.0.0",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "@types/pg": "^8.15.5",
+    "tsx": "^4.20.6"
   }
 }
